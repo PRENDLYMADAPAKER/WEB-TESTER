@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WEB IPTV Deluxe</title>
+
+  <!-- HLS + DASH -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.0/hls.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
+  <script src="channels.js"></script>
+
+  <link rel="icon" href="logo.png" type="image/png" />
+
+  <style>
+    :root {
+      --accent: #00e0ff;
+      --accent2: #009dff;
+      --bg-dark: #0b1520;
+      --bg-panel: #12283a;
+      --text: #e9f6ff;
+      --glass: rgba(255,255,255,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Poppins, Arial, sans-serif; }
+    body {
+      display: flex;
+      height: 100vh;
+      background: linear-gradient(145deg, var(--bg-dark), #0e1b2a);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      width: 300px;
+      background: var(--bg-panel);
+      border-right: 2px solid #0a1c2b;
+      display: flex;
+      flex-direction: column;
+      transition: transform .3s ease;
+      z-index: 100;
+    }
+    #sidebar.collapsed { transform: translateX(-100%); }
+
+    #sidebar header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 15px;
+      border-bottom: 1px solid #1d3a55;
+      background: rgba(0,0,0,0.2);
+    }
+    #sidebar header img {
+      height: 40px;
+      filter: drop-shadow(0 0 6px var(--accent));
+    }
+    #toggleMenu {
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+      color: var(--accent);
+    }
+
+    /* Filters */
+    #filterBar {
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      flex-direction: column;
+    }
+    #searchInput, #categorySelect {
+      width: 100%;
+      padding: 8px 10px;
+      border: none;
+      border-radius: 8px;
+      background: #0b1f33;
+      color: var(--text);
+      outline: none;
+    }
+    #searchInput:focus, #categorySelect:focus {
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 5px var(--accent);
+    }
+
+    /* Channel list */
+    #channelList {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+    }
+    #channelList::-webkit-scrollbar { width: 6px; }
+    #channelList::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 6px; }
+    .channel {
+      background: var(--glass);
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s ease;
+      border: 1px solid transparent;
+    }
+    .channel:hover {
+      background: var(--accent2);
+      color: #fff;
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
+    /* Main */
+    #main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top bar */
+    #topbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: rgba(10,25,40,0.95);
+      border-bottom: 2px solid #0a2a40;
+      z-index: 99;
+      backdrop-filter: blur(6px);
+    }
+    #topbar h1 {
+      color: var(--accent);
+      font-size: 22px;
+      text-shadow: 0 0 8px var(--accent2);
+      font-weight: 600;
+    }
+    #menuBtn {
+      font-size: 28px;
+      cursor: pointer;
+      display: none;
+      color: var(--accent);
+    }
+
+    /* Video container */
+    #videoContainer {
+      position: relative;
+      width: 80%;
+      max-width: 960px;
+      aspect-ratio: 16 / 9;
+      margin-top: 80px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
+    }
+    video, iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+
+    #nowPlaying {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    #loadingOverlay {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      font-size: 18px;
+      backdrop-filter: blur(4px);
+    }
+
+    video::-webkit-media-controls-timeline { display: none !important; }
+    video::-webkit-media-controls-current-time-display { display: none !important; }
+    video::-webkit-media-controls-time-remaining-display { display: none !important; }
+
+    @media(max-width: 768px){
+      #toggleMenu, #menuBtn { display: block; }
+      #sidebar { position: fixed; top: 0; left: 0; height: 100vh; }
+      #main { flex: 1; overflow-y: auto; }
+      #videoContainer { width: 95%; margin-top: 100px; }
+      #topbar h1 { font-size: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <header>
+      <img src="mwlogo.png" alt="Logo">
+      <span id="toggleMenu">✖</span>
+    </header>
+
+    <div id="filterBar">
+      <input type="text" id="searchInput" placeholder="🔍 Search channel..." />
+      <select id="categorySelect"><option value="all">All Categories</option></select>
+    </div>
+    <div id="channelList"></div>
+  </aside>
+
+  <!-- Main -->
+  <main id="main">
+    <div id="topbar">
+      <span id="menuBtn">☰</span>
+      <h1>WEB IPTV DELUXE</h1>
+      <div style="width:28px"></div>
+    </div>
+
+    <div id="videoContainer">
+      <div id="nowPlaying">Now Playing: —</div>
+      <div id="loadingOverlay">Loading...</div>
+      <iframe id="videoFrame" allowfullscreen></iframe>
+      <video id="videoPlayer" controls></video>
+    </div>
+  </main>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleMenu = document.getElementById('toggleMenu');
+    const menuBtn = document.getElementById('menuBtn');
+    const channelList = document.getElementById('channelList');
+    const video = document.getElementById('videoPlayer');
+    const iframe = document.getElementById('videoFrame');
+    const nowPlaying = document.getElementById('nowPlaying');
+    const searchInput = document.getElementById('searchInput');
+    const categorySelect = document.getElementById('categorySelect');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+
+    let hls = null;
+    let shakaPlayer = null;
+
+    toggleMenu.onclick = () => sidebar.classList.add('collapsed');
+    menuBtn.onclick = () => sidebar.classList.remove('collapsed');
+
+    function buildCategories() {
+      const categories = new Set();
+      combinedChannels.forEach(ch => { if (ch.category) categories.add(ch.category); });
+      categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = cat;
+        categorySelect.appendChild(opt);
+      });
+    }
+
+    function loadChannels() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const selectedCat = categorySelect.value;
+      channelList.innerHTML = '';
+
+      combinedChannels.forEach(ch => {
+        const matchesSearch = ch.name.toLowerCase().includes(searchTerm);
+        const matchesCat = (selectedCat === 'all' || ch.category === selectedCat);
+        if (matchesSearch && matchesCat) {
+          const el = document.createElement('div');
+          el.className = 'channel';
+          el.textContent = ch.name;
+          el.onclick = () => playChannel(ch);
+          channelList.appendChild(el);
+        }
+      });
+    }
+
+    function stopAllPlayers() {
+      if (hls) { try { hls.destroy(); } catch(e){} hls = null; }
+      if (shakaPlayer) { try { shakaPlayer.unload(); } catch(e){} shakaPlayer = null; }
+
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+      video.currentTime = 0;
+      video.style.display = 'none';
+      iframe.src = '';
+      iframe.style.display = 'none';
+      video.srcObject = null;
+    }
+
+    async function playChannel(ch) {
+      stopAllPlayers();
+      nowPlaying.textContent = "Now Playing: " + ch.name;
+      loadingOverlay.style.display = 'flex';
+      await new Promise(r => setTimeout(r, 150));
+
+      try {
+        if (ch.type === 'youtube') {
+          iframe.src = ch.url + (ch.url.includes('?') ? '&' : '?') + 'autoplay=1';
+          iframe.style.display = 'block';
+          return;
+        }
+
+        if (ch.type === 'hls') {
+          video.style.display = 'block';
+          if (Hls.isSupported()) {
+            hls = new Hls();
+            hls.loadSource(ch.url);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+          } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = ch.url;
+            video.play();
+          }
+          return;
+        }
+
+        if (ch.type === 'dash') {
+          video.style.display = 'block';
+          if (!shaka.Player.isBrowserSupported()) {
+            alert('Shaka not supported on this browser');
+            return;
+          }
+
+          shakaPlayer = new shaka.Player(video);
+          const drmConfig = {};
+
+          if (ch.clearKey) drmConfig.clearKeys = ch.clearKey;
+          if (ch.drm && ch.drm.widevine)
+            drmConfig.servers = { 'com.widevine.alpha': ch.drm.widevine };
+
+          if (Object.keys(drmConfig).length) shakaPlayer.configure({ drm: drmConfig });
+
+          shakaPlayer.configure({
+            streaming: { bufferingGoal: 60, rebufferingGoal: 2, bufferBehind: 30 },
+            abr: { enabled: true, defaultBandwidthEstimate: 500000 }
+          });
+
+          await shakaPlayer.load(ch.url);
+          video.play();
+        }
+      } catch (e) {
+        console.error("Shaka/HLS error:", e);
+        alert('Error loading DASH/Widevine: ' + (e && e.message ? e.message : JSON.stringify(e)));
+      } finally {
+        loadingOverlay.style.display = 'none';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      shaka.polyfill.installAll();
+      buildCategories();
+      loadChannels();
+    });
+
+    searchInput.addEventListener('input', loadChannels);
+    categorySelect.addEventListener('change', loadChannels);
+  </script>
+</body>
+      </html>
