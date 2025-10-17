@@ -16,12 +16,6 @@ const combinedChannels = [
   { name: "SUPER RADYO DZBB", type: "hls", category: "Local Channels",
     url: "https://stream.gmaNews.tv/ioslive/livestream/playlist.m3u8" },
 
-  { name: "5 StarMax", type: "hls", category: "Movie Channels",
-    url: "http://23.237.104.106:8080/USA_5STARMAX/index.m3u8" },
-
-  { name: "AMC", type: "hls", category: "Movie Channels",
-    url: "http://jabawalkies.club:8080/Yge18mSBSG/Tygp63MXun/1527" },
-
   /* ---------- DASH STREAMS (ClearKey) ---------- */
   {
     name: "A2Z",
@@ -313,32 +307,24 @@ const combinedChannels = [
       "07aa813bf2c147748046edd930f7736e": "3bd6688b8b44e96201e753224adfc8fb"
     }
   },
-
-  {
-    name: "CINEMAX MOREMAX",
-    type: "hls",
-    url: "http://23.237.104.106:8080/USA_MOREMAX/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cinemax-moremax-us.png?raw=true",
-    category: "Movie Channels"
-  },
   {
     name: "FX",
     type: "hls",
-    url: "http://23.237.104.106:8080/USA_FX/index.m3u8",
+    url: "https://fl7.moveonjoy.com/FX/index.m3u8",
     logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fx-us.png?raw=true",
     category: "Movie Channels"
   },
   {
     name: "FXM",
     type: "hls",
-    url: "http://drewlive24.duckdns.org:4123?url=https%3A%2F%2Fzekonew.newkso.ru%2Fzeko%2Fpremium381%2Fmono.m3u8&data=T3JpZ2luPWh0dHBzOi8vZm9yY2VkdG9wbGF5Lnh5enxSZWZlcmVyPWh0dHBzOi8vZm9yY2VkdG9wbGF5Lnh5ei98VXNlci1hZ2VudD1Nb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0OyBydjoxMzkuMCkgR2Vja28vMjAxMDAxMDEgRmlyZWZveC8xMzkuMA%3D%3D",
+    url: "https://fl7.moveonjoy.com/FX_MOVIE/index.m3u8",
     logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fxm-movie-channel-us.png?raw=true",
     category: "Movie Channels"
   },
   {
     name: "FXX",
     type: "hls",
-    url: "https://fl3.moveonjoy.com/FXX/index.m3u8",
+    url: "https://fl7.moveonjoy.com/FYI/index.m3u8",
     logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fxx-us.png?raw=true",
     category: "Movie Channels"
   },
