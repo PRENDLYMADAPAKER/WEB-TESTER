@@ -315,12 +315,195 @@ const combinedChannels = [
   },
 
   {
-    name: "CELESTIAL MOVIES",
+    name: "CINEMAX MOREMAX",
+    type: "hls",
+    url: "http://23.237.104.106:8080/USA_MOREMAX/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cinemax-moremax-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "FX",
+    type: "hls",
+    url: "http://23.237.104.106:8080/USA_FX/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fx-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "FXM",
+    type: "hls",
+    url: "http://drewlive24.duckdns.org:4123?url=https%3A%2F%2Fzekonew.newkso.ru%2Fzeko%2Fpremium381%2Fmono.m3u8&data=T3JpZ2luPWh0dHBzOi8vZm9yY2VkdG9wbGF5Lnh5enxSZWZlcmVyPWh0dHBzOi8vZm9yY2VkdG9wbGF5Lnh5ei98VXNlci1hZ2VudD1Nb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0OyBydjoxMzkuMCkgR2Vja28vMjAxMDAxMDEgRmlyZWZveC8xMzkuMA%3D%3D",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fxm-movie-channel-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "FXX",
+    type: "hls",
+    url: "https://fl3.moveonjoy.com/FXX/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fxx-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Hits HD",
     type: "dash",
-    url: "http://linearjitp-playback.astro.com.my/dash-wv/linear/506/default_ott.mpd",
-     category: "Movie Channels",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/hits_hd1/default/index.mpd",
+    logo: "https://i.imgur.com/CxqHKUO.png",
+    category: "Movie Channels",
     clearKey: {
-      "c5c1ba26907291afec11a9a78d513410": "361197805d0149c29801946cf2dde67c"
+      "dac605bc197e442c93f4f08595a95100": "975e27ffc1b7949721ee3ccb4b7fd3e5"
     }
   },
+  {
+    name: "Hits Movies",
+    type: "dash",
+    url: "https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/dr_hitsmovies.mpd",
+    logo: "https://astromedia.com.my/wp-content/uploads/2023/12/hitsmovie2.jpeg",
+    category: "Movie Channels",
+    clearKey: {
+      "f56b57b32d7e4b2cb21748c0b56761a7": "3df06a89aa01b32655a77d93e09e266f"
+    }
+  },
+  {
+    name: "Hits Now",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/cg_hitsnow/default/index.mpd",
+    logo: "https://i.imgur.com/tYfJVjx.png",
+    category: "Movie Channels",
+    clearKey: {
+      "14439a1b7afc4527bb0ebc51cf11cbc1": "92b0287c7042f271b266cc11ab7541f1"
+    }
+  },
+  {
+    name: "Hi-Yah!",
+    type: "hls",
+    url: "https://linear-59.frequency.stream/dist/xumo/59/hls/master/playlist_1920x1080.m3u8",
+    logo: "https://i.imgur.com/gGbiY5u.png",
+    category: "Movie Channels"
+  },
+  {
+    name: "HBO",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_hbohd/default/index.mpd",
+    logo: "https://i.imgur.com/pa2SF5Z.png",
+    category: "Movie Channels",
+    clearKey: {
+      "d47ebabf7a21430b83a8c4b82d9ef6b1": "54c213b2b5f885f1e0290ee4131d425b"
+    }
+  },
+  {
+    name: "HBO2",
+    type: "hls",
+    url: "http://jabawalkies.club:8080/Yge18mSBSG/Tygp63MXun/18267",
+    logo: "https://m.media-amazon.com/images/G/01/digital/video/Linear_Clean_Slate/HBO2._SL170_FMpng_.png",
+    category: "Movie Channels"
+  },
+  {
+    name: "HBO Comedy",
+    type: "hls",
+    url: "http://jabawalkies.club:8080/Yge18mSBSG/Tygp63MXun/1609",
+    logo: "https://m.media-amazon.com/images/G/01/digital/video/Linear_Clean_Slate/HBO_Comedy._SL170_FMpng_.png",
+    category: "Movie Channels"
+  },
+  {
+    name: "HBO Hits",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_hbohits/default1/index.mpd",
+    logo: "https://i.imgur.com/pZn9JHj.png",
+    category: "Movie Channels",
+    clearKey: {
+      "b04ae8017b5b4601a5a0c9060f6d5b7d": "a8795f3bdb8a4778b7e888ee484cc7a1"
+    }
+  },
+  {
+    name: "HBO Signature",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_hbosign/default/index.mpd",
+    logo: "https://i.imgur.com/3BOoqQn.png",
+    category: "Movie Channels",
+    clearKey: {
+      "a06ca6c275744151895762e0346380f5": "559da1b63eec77b5a942018f14d3f56f"
+    }
+  },
+  {
+    name: "HBO Family",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_hbofam/default/index.mpd",
+    logo: "https://i.imgur.com/Zy3pvJV.png",
+    category: "Movie Channels",
+    clearKey: {
+      "872910c843294319800d85f9a0940607": "f79fd895b79c590708cf5e8b5c6263be"
+    }
+  },
+  {
+    name: "HBO Zone",
+    type: "hls",
+    url: "http://jabawalkies.club:8080/Yge18mSBSG/Tygp63MXun/1614",
+    logo: "https://m.media-amazon.com/images/G/01/digital/video/Linear_Clean_Slate/HBO_Zone_East._SL170_FMpng_.png",
+    category: "Movie Channels"
+  },
+  {
+    name: "MGM+",
+    type: "hls",
+    url: "https://fl3.moveonjoy.com/EPIX/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mgm-plus-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "MGM+ Drive-In",
+    type: "hls",
+    url: "http://fl1.moveonjoy.com/EPIX_DRIVE_IN/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mgm-plus-drive-in-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "MGM+ Hits",
+    type: "hls",
+    url: "http://fl1.moveonjoy.com/EPIX_HITS/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mgm-plus-hits-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "MovieSphere by Lionsgate",
+    type: "hls",
+    url: "https://jmp2.uk/plu-645e7828e1979c00087b75b4.m3u8",
+    logo: "https://images.pluto.tv/channels/645e7828e1979c00087b75b4/colorLogoPNG.png",
+    category: "Movie Channels"
+  },
+  {
+    name: "Movie Time",
+    type: "hls",
+    url: "http://38.143.48.212:9981/stream/channelid/1403847081?profile=pass",
+    logo: "https://media.starlite.best/movietime.ca.png",
+    category: "Movie Channels"
+  },
+  {
+    name: "Movies Now",
+    type: "dash",
+    url: "https://times-ott-live.akamaized.net/moviesnow_wv_drm/index.mpd",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV3suWaQrCK8hU-TD0_Oj9DcBQ8oZmiVXY5xDhzSZ4YkrBmnv5Ah-JmMPL&s=10",
+    category: "Movie Channels",
+    clearKey: {
+      "40f019b86241d23ef075633fd7f1e927": "058dec845bd340178a388edd104a015e"
+    }
+  },
+  {
+    name: "OUTER MAX",
+    type: "hls",
+    url: "https://fl3.moveonjoy.com/OUTER_MAX/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cinemax-outermax-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "RageTV",
+    type: "hls",
+    url: "https://live20.bozztv.com/giatv/giatv-ragetv/ragetv/playlist.m3u8",
+    logo: "https://i.imgur.com/Ym32WqZ.png",
+    category: "Movie Channels"
+  },
+  {
+    name: "Rakuten Viki",
+    type: "hls",
+    url: "https://268d7193278949b4b4796e63861deee5.mediatailor.us-east-1.amazonaws.com/v1/master/04fd913bb278d8775298c26fdca9d9841f37601f/LG_RakutenViki/playlist.m3u8",
+    logo: "https://images.sr.roku.com/idType/roku/context/trc/id/c4bdfe6fd751590e9d096b5de264bba1/https%3A%2F%2Fimage.roku.com%2Fbh-uploads%2Fproduction%2FinfoHUDLogo%2F1678995051754_image_hud1_260x147.png",
+    category: "Movie Channels"
+  }
 ];
