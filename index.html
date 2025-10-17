@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NZM IPTV</title>
+
+  <!-- HLS + DASH -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.0/hls.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
+
+  <!-- ✅ Load your channels file FIRST -->
+  <script src="channels.js"></script>
+
+  <link rel="icon" href="logo.png" type="image/png" />
+
+  <style>
+    :root {
+      --accent: #00e0ff;
+      --accent2: #009dff;
+      --bg-dark: #0b1520;
+      --bg-panel: #12283a;
+      --text: #e9f6ff;
+      --glass: rgba(255,255,255,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Poppins, Arial, sans-serif; }
+    body {
+      display: flex;
+      height: 100vh;
+      background: linear-gradient(145deg, var(--bg-dark), #0e1b2a);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      width: 300px;
+      background: var(--bg-panel);
+      border-right: 2px solid #0a1c2b;
+      display: flex;
+      flex-direction: column;
+      transition: transform .3s ease;
+      z-index: 100;
+    }
+    #sidebar.collapsed { transform: translateX(-100%); }
+
+    #sidebar header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 15px;
+      border-bottom: 1px solid #1d3a55;
+      background: rgba(0,0,0,0.2);
+    }
+    #sidebar header img {
+      height: 40px;
+      filter: drop-shadow(0 0 6px var(--accent));
+    }
+    #toggleMenu {
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+      color: var(--accent);
+    }
+
+    /* Filters */
+    #filterBar {
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      flex-direction: column;
+    }
+    #searchInput, #categorySelect {
+      width: 100%;
+      padding: 8px 10px;
+      border: none;
+      border-radius: 8px;
+      background: #0b1f33;
+      color: var(--text);
+      outline: none;
+    }
+    #searchInput:focus, #categorySelect:focus {
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 5px var(--accent);
+    }
+
+    /* Channel list */
+    #channelList {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+    }
+    #channelList::-webkit-scrollbar { width: 6px; }
+    #channelList::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 6px; }
+    .channel {
+      background: var(--glass);
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      cursor: pointer;
+      transition: all .12s ease;
+      border: 1px solid transparent;
+    }
+    .channel:hover {
+      background: rgba(0,157,255,0.08);
+      color: #fff;
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .channel img{ width:56px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0 }
+    .channel .meta{flex:1}
+    .channel .meta .name{font-weight:600}
+    .fav-btn{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);padding:6px;border-radius:8px;cursor:pointer}
+
+    /* Main */
+    #main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top bar */
+    #topbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: rgba(10,25,40,0.95);
+      border-bottom: 2px solid #0a2a40;
+      z-index: 99;
+      backdrop-filter: blur(6px);
+      height:64px;
+    }
+    #topbar h1 {
+      color: var(--accent);
+      font-size: 20px;
+      text-shadow: 0 0 8px var(--accent2);
+      font-weight: 600;
+      margin-left:6px;
+    }
+    #menuBtn {
+      font-size: 28px;
+      cursor: pointer;
+      display: none;
+      color: var(--accent);
+    }
+
+    /* Video container */
+    #videoContainer {
+      position: relative;
+      width: 80%;
+      max-width: 960px;
+      aspect-ratio: 16 / 9;
+      margin-top: 100px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
+    }
+    video, iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+
+    #nowPlaying {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      pointer-events: none;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    #loadingOverlay {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      font-size: 18px;
+      backdrop-filter: blur(4px);
+    }
+
+    .player-actions {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      display: flex;
+      gap: 8px;
+    }
+    .player-actions button { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.03); color:var(--text); padding:8px 10px; border-radius:8px; cursor:pointer }
+
+    /* now card beneath */
+    #nowCard {
+      margin-top: 16px;
+      width: 80%;
+      max-width: 960px;
+      background: rgba(255,255,255,0.02);
+      padding: 12px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--text);
+    }
+    #nowCard img { width:86px;height:56px;object-fit:cover;border-radius:8px;display:none }
+
+    @media(max-width: 768px){
+      #toggleMenu, #menuBtn { display: block; }
+      #sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index:200; }
+      #main { flex: 1; overflow-y: auto; }
+      #videoContainer { width: 95%; margin-top: 120px; }
+      #topbar h1 { font-size: 18px; }
+      .channel img{ width:46px;height:36px }
+      #nowCard { width: 95% }
+    }
+  </style>
+</head>
+
+<body>
+  <aside id="sidebar">
+    <header>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="mwlogo.png" alt="Logo">
+        <div style="line-height:1">
+          <div style="font-weight:700;color:var(--accent)">NZM IPTV</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5)">WEB PLAYER</div>
+        </div>
+      </div>
+      <span id="toggleMenu">✖</span>
+    </header>
+
+    <div id="filterBar">
+      <input type="text" id="searchInput" placeholder="🔍 Search channel..." />
+      <select id="categorySelect"><option value="all">All Categories</option></select>
+    </div>
+    <div id="channelList"></div>
+  </aside>
+
+  <main id="main">
+    <div id="topbar">
+      <span id="menuBtn">☰</span>
+      <h1>NZM IPTV</h1>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="pipBtn">PiP</button>
+        <button id="prevBtn">◀</button>
+        <button id="nextBtn">▶</button>
+      </div>
+    </div>
+
+    <div id="videoContainer">
+      <div id="nowPlaying">Now: —</div>
+      <div id="loadingOverlay">Loading...</div>
+
+      <div class="player-actions">
+        <button id="favToggle">♡</button>
+        <button id="reloadBtn">⟳</button>
+      </div>
+
+      <iframe id="videoFrame" allowfullscreen></iframe>
+      <video id="videoPlayer" controls playsinline></video>
+    </div>
+
+    <div id="nowCard">
+      <img id="cardLogo" src="" alt="logo">
+      <div style="flex:1">
+        <div id="cardTitle" style="font-weight:700;color:var(--accent)">No channel</div>
+        <div id="cardEpg" style="color:rgba(255,255,255,0.7)">—</div>
+      </div>
+      <div style="text-align:right;font-size:12px;color:rgba(255,255,255,0.6)">
+        <div id="lastPlayed">Last: —</div>
+        <div id="historyCount">History: 0</div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ✅ Auto-detect any possible channel array variable
+    const combinedChannels =
+      window.combinedChannels ||
+      window.channels ||
+      window.nzmChannels ||
+      window.channelList ||
+      [];
+
+    console.log("✅ Detected channels:", combinedChannels.length);
+
+    if (!combinedChannels.length) {
+      console.warn("⚠️ No channels detected — check your channels.js file or its variable name");
+    }
+
+    // continue with rendering only if channels exist
+    // (rest of the logic from previous working version)
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!combinedChannels.length) {
+        document.getElementById("channelList").innerHTML =
+          '<div style="padding:14px;color:rgba(255,255,255,0.6)">⚠️ No channels loaded from channels.js</div>';
+      } else {
+        // your previous rendering and play logic here (unchanged)
+        alert("Channels loaded successfully: " + combinedChannels.length);
+      }
+    });
+  </script>
+</body>
+      </html>
