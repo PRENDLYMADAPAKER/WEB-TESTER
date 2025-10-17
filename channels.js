@@ -16,6 +16,12 @@ const combinedChannels = [
   { name: "SUPER RADYO DZBB", type: "hls", category: "Local Channels",
     url: "https://stream.gmaNews.tv/ioslive/livestream/playlist.m3u8" },
 
+  { name: "5 StarMax", type: "hls", category: "Movie Channels",
+    url: "http://23.237.104.106:8080/USA_5STARMAX/index.m3u8" },
+
+  { name: "AMC", type: "hls", category: "Movie Channels",
+    url: "http://jabawalkies.club:8080/Yge18mSBSG/Tygp63MXun/1527" },
+
   /* ---------- DASH STREAMS (ClearKey) ---------- */
   {
     name: "A2Z",
@@ -101,6 +107,16 @@ const combinedChannels = [
     category: "Local Channels",
     clearKey: {
       "16ecd238c0394592b8d3559c06b1faf5": "05b47ae3be1368912ebe28f87480fc84"
+    }
+  },
+
+  {
+    name: "I Heart Movies",
+    type: "dash",
+    url: "https://kaotv.ganbaruby23.xyz/dash/iheartmovies/manifest.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "abba271e8bcf552bbd2e86a434a9a5d9": "69eaa802a6763af979e8d1940fb88392"
     }
   },
 
@@ -295,6 +311,16 @@ const combinedChannels = [
      category: "Local Channels",
     clearKey: {
       "07aa813bf2c147748046edd930f7736e": "3bd6688b8b44e96201e753224adfc8fb"
+    }
+  },
+
+  {
+    name: "CELESTIAL MOVIES",
+    type: "dash",
+    url: "http://linearjitp-playback.astro.com.my/dash-wv/linear/506/default_ott.mpd",
+     category: "Movie Channels",
+    clearKey: {
+      "c5c1ba26907291afec11a9a78d513410": "361197805d0149c29801946cf2dde67c"
     }
   },
 ];
