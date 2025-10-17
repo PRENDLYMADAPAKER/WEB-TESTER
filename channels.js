@@ -56,7 +56,12 @@ const combinedChannels = [
       "0f8537d8412b11edb8780242ac120002": "2ffd7230416150fd5196fd7ea71c36f3"
     }
   },
-
+  {
+    name: "Cinema One",
+    type: "dash",
+    url: "https://live-faws.akamaized.net/out/v1/93b9db7b231d45f28f64f29b86dc6c65/index.mpd",
+    category: "Local Channels",
+  },
   {
     name: "Cinema One Global",
     type: "dash",
@@ -66,7 +71,7 @@ const combinedChannels = [
       "58d0e56991194043b8fb82feb4db7276": "d68f41b59649676788889e19fb10d22c"
     }
   },
-
+  
   {
     name: "Cinemo",
     type: "dash",
