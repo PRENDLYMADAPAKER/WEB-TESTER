@@ -97,5 +97,5 @@ const combinedChannels = [
       "ec7ee27d83764e4b845c48cca31c8eef": "9c0e4191203fccb0fde34ee29999129e"
     }
   },
-  }
+  
 ];
