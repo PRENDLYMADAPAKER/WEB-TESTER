@@ -308,37 +308,6 @@ const combinedChannels = [
     }
   },
   {
-    name: "FX",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/FX/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fx-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "FXM",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/FX_MOVIE/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fxm-movie-channel-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "FXX",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/FYI/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fxx-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Hits HD",
-    type: "dash",
-    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/hits_hd1/default/index.mpd",
-    logo: "https://i.imgur.com/CxqHKUO.png",
-    category: "Movie Channels",
-    clearKey: {
-      "dac605bc197e442c93f4f08595a95100": "975e27ffc1b7949721ee3ccb4b7fd3e5"
-    }
-  },
-  {
     name: "Hits Movies",
     type: "dash",
     url: "https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/dr_hitsmovies.mpd",
@@ -376,19 +345,6 @@ const combinedChannels = [
     }
   },
   {
-    name: "HBO2",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/HBO_2/index.m3u8",
-    logo: "https://m.media-amazon.com/images/G/01/digital/video/Linear_Clean_Slate/HBO2._SL170_FMpng_.png",
-    category: "Movie Channels"
-  },
-  {
-    name: "HBO Comedy",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/HBO_COMEDY/index.m3u8",
-    logo: "https://m.media-amazon.com/images/G/01/digital/video/Linear_Clean_Slate/HBO_Comedy._SL170_FMpng_.png",
-    category: "Movie Channels"
-  },
   {
     name: "HBO Hits",
     type: "dash",
@@ -418,13 +374,6 @@ const combinedChannels = [
     clearKey: {
       "872910c843294319800d85f9a0940607": "f79fd895b79c590708cf5e8b5c6263be"
     }
-  },
-  {
-    name: "HBO Zone",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/HBO_ZONE/index.m3u8",
-    logo: "https://m.media-amazon.com/images/G/01/digital/video/Linear_Clean_Slate/HBO_Zone_East._SL170_FMpng_.png",
-    category: "Movie Channels"
   },
   {
     name: "MovieSphere by Lionsgate",
@@ -464,125 +413,7 @@ const combinedChannels = [
     logo: "https://i.imgur.com/Ym32WqZ.png",
     category: "Movie Channels"
   },
-  {
-    name: "Showtime",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/SHOWTIME/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Showtime 2",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/SHOWTIME_2/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-2-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Showtime Extreme",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/SHOWTIME_EXTREME/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-extreme-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Showtime Next",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/SHOWTIME_NEXT/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-next-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Showtime West",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/SHOWTIME_WEST/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Showtime Women",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/SHOWTIME_WOMEN/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-women-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Sony Movie Channel",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/Sony_Movie_Channel/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/sony-movie-channel-hz-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Start TV",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/Start_Tv/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/start-tv-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Starz",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/STARZ/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Starz Comedy",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/STARZ_COMEDY/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-comedy-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Starz Edge",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/STARZ_EDGE/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-edge-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Starz Encore Action",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/STARZ_ENCORE_ACTION/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-encore-action-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Starz Encore Classic",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/STARZ_ENCORE_CLASSIC/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-encore-classic-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Starz Encore Westerns",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/STARZ_ENCORE_WESTERNS/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-encore-westerns-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "Starz West",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/STARZ_WEST/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "SundanceTV",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/SUNDANCE/index.m3u8",
-    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s16108_dark_360w_270h.png",
-    category: "Movie Channels"
-  },
-  {
-    name: "SYFY",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/SYFY/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/syfy-us.png?raw=true",
-    category: "Movie Channels"
-  },
+
   {
     name: "TAP Action Flix",
     type: "dash",
@@ -639,13 +470,7 @@ const combinedChannels = [
     category: "Anime/Cartoons",
     clearKey: { "92032b0e41a543fb9830751273b8debd": "03f8b65e2af785b10d6634735dbe6c11" }
   },
-  {
-    name: "Anime All Day",
-    type: "hls",
-    url: "https://jmp2.uk/stvp-USAJ3504502A",
-    logo: "https://images.pluto.tv/channels/5812b7d3249444e05d09cc49/colorLogoPNG.png",
-    category: "Anime/Cartoons"
-  },
+
   {
     name: "AnimeX",
     type: "hls",
@@ -667,11 +492,252 @@ const combinedChannels = [
     logo: "https://static.wikia.nocookie.net/animax/images/b/b8/Aniplus_Asia_Logo.png",
     category: "Anime/Cartoons"
   },
+
   {
-    name: "Boomerang",
-    type: "hls",
-    url: "https://fl7.moveonjoy.com/BOOMERANG/index.m3u8",
-    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s21883_dark_360w_270h.png",
-    category: "Anime/Cartoons"
+  name: "Cartoon Network HD",
+  type: "dash",
+  url: "http://linearjitp-playback.astro.com.my/dash-wv/linear/509/default_ott.mpd",
+  logo: "https://i.imgur.com/l7p2MpK.png",
+  category: "Anime/Cartoons",
+  clearKey: {
+    "1a05bebf706408431a390c3f9f40f410": "89c5ff9f8e65c7fe966afbd2f9128e5f"
   }
+  },
+  {
+  name: "DreamWorks Tagalized (HD)",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_dreamworks_hd1/default/index.mpd",
+  logo: "https://i.imgur.com/cgfKSDP.png",
+  category: "Anime/Cartoons",
+  clearKey: {
+    "4ab9645a2a0a47edbd65e8479c2b9669": "8cb209f1828431ce9b50b593d1f44079"
+  }
+},
+{
+  name: "DreamWorks Tagalized",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_dreamworktag/default/index.mpd",
+  logo: "https://qp-pldt-image-resizer-cloud-prod.akamaized.net/image/40E328E7-FE69-4287-86EA-FA942A7EA302/0-16x9.jpg?width=203",
+  category: "Anime/Cartoons",
+  clearKey: {
+    "564b3b1c781043c19242c66e348699c5": "d3ad27d7fe1f14fb1a2cd5688549fbab"
+  }
+},
+  {
+  name: "Moonbug",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_moonbug_kids_sd/default/index.mpd",
+  logo: "https://i.imgur.com/cfQMx3J.png",
+  category: "Anime/Cartoons",
+  clearKey: {
+    "0bf00921bec94a65a124fba1ef52b1cd": "0f1488487cbe05e2badc3db53ae0f29f"
+  }
+},
+{
+  name: "PBS Kids",
+  type: "hls",
+  url: "https://2-fss-2.streamhoster.com/pl_140/amlst:200914-1298290/playlist.m3u8",
+  logo: "https://i.imgur.com/xhmWQXs.png",
+  category: "Anime/Cartoons"
+    },
+  {
+  name: "A2Z",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_a2z/default/index.mpd",
+  logo: "https://i.imgur.com/l7p2MpK.png",
+  category: "Cignal",
+  clearKey: {
+    "f703e4c8ec9041eeb5028ab4248fa094": "c22f2162e176eee6273a5d0b68d19530"
+  }
+},
+{
+  name: "One PH",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/oneph_sd/default/index.mpd",
+  logo: "https://i.imgur.com/U9QwJSE.png",
+  category: "Cignal",
+  clearKey: {
+    "92834ab4a7e1499b90886c5d49220e46": "a7108d9a6cfcc1b7939eb111daf09ab3"
+  }
+},
+{
+  name: "Buko",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/cg_buko_sd/default/index.mpd",
+  logo: "https://i.imgur.com/BxQvEil.png",
+  category: "Cignal",
+  clearKey: {
+    "d273c085f2ab4a248e7bfc375229007d": "7932354c3a84f7fc1b80efa6bcea0615"
+  }
+},
+{
+  name: "Sari-Sari",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_sarisari/default/index.mpd",
+  logo: "https://i.imgur.com/25CGN9g.png",
+  category: "Cignal",
+  clearKey: {
+    "0a7ab3612f434335aa6e895016d8cd2d": "b21654621230ae21714a5cab52daeb9d"
+  }
+},
+{
+  name: "TV5 HD",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/tv5_hd/default1/index.mpd",
+  logo: "https://i.imgur.com/U5L67WD.png",
+  category: "Cignal",
+  clearKey: {
+    "2615129ef2c846a9bbd43a641c7303ef": "07c7f996b1734ea288641a68e1cfdc4d"
+  }
+},
+{
+  name: "Lotus Macau",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/lotusmacau_prd/default/index.mpd",
+  logo: "https://i.imgur.com/5G72qjx.png",
+  category: "Cignal",
+  clearKey: {
+    "60dc692e64ea443a8fb5ac186c865a9b": "01bdbe22d59b2a4504b53adc2f606cc1"
+  }
+},
+{
+  name: "tvUP",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/tvup_prd/default/index.mpd",
+  logo: "https://i.imgur.com/OHLO5Hz.png",
+  category: "Cignal",
+  clearKey: {
+    "83e813ccd4ca4837afd611037af02f63": "a97c515dbcb5dcbc432bbd09d15afd41"
+  }
+},
+{
+  name: "Thrill",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/cg_thrill_sd/default/index.mpd",
+  logo: "https://i.imgur.com/kgqsalZ.png",
+  category: "Cignal",
+  clearKey: {
+    "928114ffb2394d14b5585258f70ed183": "a82edc340bc73447bac16cdfed0a4c62"
+  }
+},
+{
+  name: "AXN",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_axn_sd/default/index.mpd",
+  logo: "https://i.imgur.com/OuaLV7f.png",
+  category: "Cignal",
+  clearKey: {
+    "fd5d928f5d974ca4983f6e9295dfe410": "3aaa001ddc142fedbb9d5557be43792f"
+  }
+},
+{
+  name: "Hits HD",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/hits_hd1/default/index.mpd",
+  logo: "https://i.imgur.com/CxqHKUO.png",
+  category: "Cignal",
+  clearKey: {
+    "dac605bc197e442c93f4f08595a95100": "975e27ffc1b7949721ee3ccb4b7fd3e5"
+  }
+},
+{
+  name: "Hits Now",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/cg_hitsnow/default/index.mpd",
+  logo: "https://i.imgur.com/Ck0ad9b.png",
+  category: "Cignal",
+  clearKey: {
+    "14439a1b7afc4527bb0ebc51cf11cbc1": "92b0287c7042f271b266cc11ab7541f1"
+  }
+},
+{
+  name: "IBC 13",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/ibc13_sd_new/default1/index.mpd",
+  logo: "https://i.imgur.com/CTHhr3Q.png",
+  category: "Cignal",
+  clearKey: {
+    "16ecd238c0394592b8d3559c06b1faf5": "05b47ae3be1368912ebe28f87480fc84"
+  }
+},
+{
+  name: "TrueTV",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/truefm_tv/default/index.mpd",
+  logo: "https://i.imgur.com/i0xetYa.png",
+  category: "Cignal",
+  clearKey: {
+    "0559c95496d44fadb94105b9176c3579": "40d8bb2a46ffd03540e0c6210ece57ce"
+  }
+},
+{
+  name: "TVN Premium",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_tvnpre/default/index.mpd",
+  logo: "https://i.imgur.com/qEPJE1t.png",
+  category: "Cignal",
+  clearKey: {
+    "e1bde543e8a140b38d3f84ace746553e": "b712c4ec307300043333a6899a402c10"
+  }
+},
+{
+  name: "KBS World",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/kbsworld/default/index.mpd",
+  logo: "https://i.imgur.com/aFDRmtm.png",
+  category: "Cignal",
+  clearKey: {
+    "22ff2347107e4871aa423bea9c2bd363": "c6e7ba2f48b3a3b8269e8bc360e60404"
+  }
+},
+{
+  name: "Tap TV",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/cg_taptv_sd/default/index.mpd",
+  logo: "https://i.imgur.com/vDvLPda.png",
+  category: "Cignal",
+  clearKey: {
+    "f6804251e90b4966889b7df94fdc621e": "55c3c014f2bd12d6bd62349658f24566"
+  }
+},
+{
+  name: "Global Trekker",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/dr_tapedge/default/index.mpd",
+  logo: "https://accion.com.ph/wp-content/uploads/2023/02/GT-Thumbnail-New.jpg",
+  category: "Cignal",
+  clearKey: {
+    "4553f7e8011f411fb625cefc39274300": "98f2f1d153367e84b5d559dc9dfb9a35"
+  }
+},
+{
+  name: "Rock Action",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/dr_rockextreme/default/index.mpd",
+  logo: "https://i.imgur.com/T70dbrM.png",
+  category: "Cignal",
+  clearKey: {
+    "0f852fb8412b11edb8780242ac120002": "4cbc004d8c444f9f996db42059ce8178"
+  }
+},
+{
+  name: "Rock Entertainment",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/dr_rockentertainment/default/index.mpd",
+  logo: "https://i.imgur.com/BuKajCb.png",
+  category: "Cignal",
+  clearKey: {
+    "e4ee0cf8ca9746f99af402ca6eed8dc7": "be2a096403346bc1d0bb0f812822bb62"
+  }
+},
+{
+  name: "TVN Movies Pinoy",
+  type: "dash",
+  url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_tvnmovie/default/index.mpd",
+  logo: "https://i.imgur.com/8YhI91e.png",
+  category: "Cignal",
+  clearKey: {
+    "2e53f8d8a5e94bca8f9a1e16ce67df33": "3471b2464b5c7b033a03bb8307d9fa35"
+  }
+  },
 ];
