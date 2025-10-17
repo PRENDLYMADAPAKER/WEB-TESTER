@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NZM IPTV</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/shaka-player.compiled.min.js"></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="app-header">
+    <h1 class="app-title">📺 NZM IPTV</h1>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search channel..." />
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- CHANNEL GRID -->
+  <main id="channelList" class="channel-grid"></main>
+
+  <!-- PLAYER MODAL -->
+  <div id="playerModal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <video id="videoPlayer" controls autoplay></video>
+      <h2 id="channelTitle"></h2>
+    </div>
+  </div>
+
+  <script src="channels.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
