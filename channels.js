@@ -7,49 +7,63 @@
 
 const combinedChannels = [
   /* ---------- HLS STREAMS ---------- */
-  { name: "48 Hours", type: "hls",
-    url: "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/6176f39e709f160007ec61c3/master.m3u8" },
+  { name: "Jugo Pinoy TV", type: "hls", category: "Local Channels",
+    url: "https://jungotvstream.chanall.tv/jungotv/jungopinoytv/stream.m3u8" },
 
-  { name: "4K Travel TV", type: "hls",
-    url: "https://streams2.sofast.tv/sofastplayout/33c31ac4-51fa-46ae-afd0-0d1fe5e60a80_0_HLS/master.m3u8" },
+  { name: "Sinemanila", type: "hls", category: "Local Channels",
+    url: "https://live20.bozztv.com/giatv/giatv-sinemanila/sinemanila/playlist.m3u8" },
 
-  { name: "CBS Sports HQ", type: "hls",
-    url: "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5e9f2c05172a0f0007db4786/master.m3u8" },
-
-  { name: "Anime All Day", type: "hls",
-    url: "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5812b7d3249444e05d09cc49/master.m3u8" },
-
-  { name: "Cinemo", type: "hls",
-    url: "https://live-faws.akamaized.net/out/v1/93b9db7b231d45f28f64f29b86dc6c65/index.mpd" },
-
-  { name: "ABS-CBN Live (YouTube)", type: "youtube",
-    url: "https://www.youtube.com/embed/x_qgWdUGb0s" },
+  { name: "SUPER RADYO DZBB", type: "hls", category: "Local Channels",
+    url: "https://stream.gmaNews.tv/ioslive/livestream/playlist.m3u8" },
 
   /* ---------- DASH STREAMS (ClearKey) ---------- */
   {
-    name: "Jeepney TV (DASH)",
-    type: "dash",
-    url: "https://abslive.akamaized.net/dash/live/2028025/jeepneytv/manifest.mpd",
-    clearKey: {
-      "90ea4079e02f418db7b170e8763e65f0": "1bfe2d166e31d03eee86ee568bd6c272"
-    }
-  },
-
-  {
-    name: "A2Z (DASH)",
+    name: "A2Z",
     type: "dash",
     url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_a2z/default/index.mpd",
+    category: "Local Channels",
     clearKey: {
       "f703e4c8ec9041eeb5028ab4248fa094": "c22f2162e176eee6273a5d0b68d19530"
     }
   },
 
   {
-    name: "GMA Pinoy TV (DASH)",
+    name: "ANC",
     type: "dash",
-    url: "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-abscbn-gma-x7-dash-abscbnono/7c693236-e0c1-40a3-8bd0-bb25e43f5bfc/index.mpd",
+    url: "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-anc-global-dash-abscbnono/index.mpd",
+    category: "Local Channels",
     clearKey: {
-      "c95ed4c44b0b4f7fa1c6ebbbbaab21a1": "47635b8e885e19f2ccbdff078c207058"
+      "4bbdc78024a54662854b412d01fafa16": "6039ec9b213aca913821677a28bd78ae"
+    }
+  },
+
+  {
+    name: "BILYONARYO CHANNEL",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/bilyonaryoch/default1/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "227ffaf09bec4a889e0e0988704d52a2": "b2d0dce5c486891997c1c92ddaca2cd2"
+    }
+  },
+
+  {
+    name: "CELESTIAL MOVIES PINOY",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/celmovie_pinoy_sd/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "0f8537d8412b11edb8780242ac120002": "2ffd7230416150fd5196fd7ea71c36f3"
+    }
+  },
+
+  {
+    name: "Cinema One Global",
+    type: "dash",
+    url: "https://d9rpesrrg1bdi.cloudfront.net/out/v1/93b9db7b231d45f28f64f29b86dc6c65/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "58d0e56991194043b8fb82feb4db7276": "d68f41b59649676788889e19fb10d22c"
     }
   },
 
@@ -57,42 +71,230 @@ const combinedChannels = [
     name: "Cinemo",
     type: "dash",
     url: "https://live-faws.akamaized.net/out/v1/93b9db7b231d45f28f64f29b86dc6c65/index.mpd",
+    category: "Local Channels",
   },
 
   {
-    name: "HBO (DASH)",
+    name: "Cinemo Global",
     type: "dash",
-    url: "https://qp-pldt-live-grp-03-prod.akamaized.net/out/u/cg_hbohd.mpd",
+    url: "https://d1bail49udbz1k.cloudfront.net/out/v1/3a895f368f4a467c9bca0962559efc19/index.mpd",
+    category: "Local Channels",
     clearKey: {
-      "d47ebabf7a21430b83a8c4b82d9ef6b1": "54c213b2b5f885f1e0290ee4131d425b"
+      "aa8aebe35ccc4541b7ce6292efcb1bfb": "aab1df109d22fc5d7e3ec121ddf24e5f"
     }
   },
 
   {
-    name: "Nickelodeon (DASH)",
+    name: "DZMM TELERADYO",
     type: "dash",
-    url: "https://linearjitp-playback.astro.com.my/dash-wv/linear/2511/default_primary.mpd",
+    url: "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-teleradyo-dash-abscbnono/index.mpd",
+    category: "Local Channels",
     clearKey: {
-      "d8520e96a1283ab6e5be538474bfa810": "bda5f7bbc1e44096f779a0619fe9881f"
+      "47c093e0c9fd4f80839a0337da3dd876": "50547394045b3d047dc7d92f57b5fb33"
     }
   },
 
   {
-    name: "BBC World News (DASH)",
+    name: "Heart of Asia",
     type: "dash",
-    url: "https://qp-pldt-live-grp-04-prod.akamaized.net/out/u/bbcworld_news_sd.mpd",
+    url: "https://kaotv.ganbaruby23.xyz/dash/heartofasia/manifest.mpd",
+    category: "Local Channels",
     clearKey: {
-      "f59650be475e4c34a844d4e2062f71f3": "119639e849ddee96c4cec2f2b6b09b40"
+      "16ecd238c0394592b8d3559c06b1faf5": "05b47ae3be1368912ebe28f87480fc84"
     }
   },
 
   {
-    name: "SPOTV (DASH)",
+    name: "Kapamilya Channel",
     type: "dash",
-    url: "https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_spotvhd.mpd",
+    url: "https://d1uf7s78uqso1e.cloudfront.net/out/v1/efa01372657648be830e7c23ff68bea2/index.mpd",
+    category: "Local Channels",
+  },
+
+  {
+    name: "KAPAMILYA CHANNEL HD",
+    type: "dash",
+    url: "https://live-faws.akamaized.net/out/v1/efa01372657648be830e7c23ff68bea2/index.mpd",
+    category: "Local Channels",
+  },
+
+  {
+    name: "KNOWLEDGE CHANNEL",
+    type: "dash",
+    url: "https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/dr_knowledgechannel.mpd",
+    category: "Local Channels",
     clearKey: {
-      "ec7ee27d83764e4b845c48cca31c8eef": "9c0e4191203fccb0fde34ee29999129e"
+      "0f856fa0412b11edb8780242ac120002": "783374273ef97ad3bc992c1d63e091e7"
     }
   },
-  
+
+  {
+    name: "ONE PH",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/oneph_sd/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "92834ab4a7e1499b90886c5d49220e46": "a7108d9a6cfcc1b7939eb111daf09ab3"
+    }
+  },
+
+  {
+    name: "ONE NEWS",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/onenews_hd1/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "d39eb201ae494a0b98583df4d110e8dd": "6797066880d344422abd3f5eda41f45f"
+    }
+  },
+
+  {
+    name: "ONE NEWS",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/onenews_hd1/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "d39eb201ae494a0b98583df4d110e8dd": "6797066880d344422abd3f5eda41f45f"
+    }
+  },
+
+  {
+    name: "ONE SPORTS",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_onesports_hd/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "53c3bf2eba574f639aa21f2d4409ff11": "3de28411cf08a64ea935b9578f6d0edd"
+    }
+  },
+
+  {
+    name: "ONE SPORTS PLUS",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_onesportsplus_hd1/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "322d06e9326f4753a7ec0908030c13d8": "1e3e0ca32d421fbfec86feced0efefdaf"
+    }
+  },
+
+  {
+    name: "PBA Rush",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_pbarush_hd1/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "76dc29dd87a244aeab9e8b7c5da1e5f3": "95b2f2ffd4e14073620506213b62ac82"
+    }
+  },
+
+  {
+    name: "PBO",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/pbo_sd/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "dcbdaaa6662d4188bdf97f9f0ca5e830": "31e752b441bd2972f2b98a4b1bc1c7a1"
+    }
+  },
+
+  {
+    name: "RPTV",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cnn_rptv_prod_hd/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "1917f4caf2364e6d9b1507326a85ead6": "a1340a251a5aa63a9b0ea5d9d7f67595"
+    }
+  },
+
+  {
+    name: "SARI-SARI",
+    type: "dash",
+    url: "https://qp-pldt-live-grp-06-prod.akamaized.net/out/u/cg_sari_sari_sd.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "0a7ab3612f434335aa6e895016d8cd2d": "b21654621230ae21714a5cab52daeb9d"
+    }
+  },
+
+  {
+    name: "TFC Asia",
+    type: "dash",
+    url: "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-tfcasia-dash-abscbnono/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "9568cc84e1d944f38eac304517eab6fd": "f12142af8f39b3bab79d3679d3665ebe"
+    }
+  },
+
+  {
+    name: "TMC",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/cg_tagalogmovie/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "96701d297d1241e492d41c397631d857": "ca2931211c1a261f082a3a2c4fd9f91b"
+    }
+  },
+
+  {
+    name: "TRUE TV",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/truefm_tv/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "0559c95496d44fadb94105b9176c3579": "40d8bb2a46ffd03540e0c6210ece57ce"
+    }
+  },
+
+  {
+    name: "TV5",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/tv5_hd/default1/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "2615129ef2c846a9bbd43a641c7303ef": "07c7f996b1734ea288641a68e1cfdc4d"
+    }
+  },
+
+   {
+    name: "TVN Movies Pinoy",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_tvnmovie/default/index.mpd",
+     category: "Local Channels",
+    clearKey: {
+      "2e53f8d8a5e94bca8f9a1e16ce67df33": "3471b2464b5c7b033a03bb8307d9fa35"
+    }
+  },
+
+   {
+    name: "TVUP",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/tvup_prd/default/index.mpd",
+    category: "Local Channels",
+    clearKey: {
+      "3e813ccd4ca4837afd611037af02f63": "a97c515dbcb5dcbc432bbd09d15afd41"
+    }
+  },
+
+   {
+    name: "UAAP VARSITY",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_uaap_cplay_sd/default/index.mpd",
+     category: "Local Channels",
+    clearKey: {
+      "95588338ee37423e99358a6d431324b9": "6e0f50a12f36599a55073868f814e81e"
+    }
+  },
+
+   {
+    name: "VIVA CINEMA",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/viva_sd/default/index.mpd",
+     category: "Local Channels",
+    clearKey: {
+      "07aa813bf2c147748046edd930f7736e": "3bd6688b8b44e96201e753224adfc8fb"
+    }
+  },
 ];
