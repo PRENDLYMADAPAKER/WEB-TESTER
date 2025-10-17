@@ -1,0 +1,1179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Clinician DTR - User Panel</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+  body {
+    font-family: Inter, system-ui, Arial, sans-serif;
+    background: linear-gradient(135deg, #ffffff, #ff9ce3, #a855f7);
+    color: #2c0a34;
+    display: flex;
+    justify-content: center;
+    padding: 28px;
+    position: relative;
+    overflow-y: auto; /* ✅ scrollable */
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 50%; left: 50%;
+    width: 400px; height: 400px;
+    background: url('https://i.imgur.com/sjdlb28.jpeg') no-repeat center center;
+    background-size: cover;
+    opacity: 0.08;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+
+  .card {
+    position: relative; z-index: 1;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 20px; border-radius: 16px;
+    max-width: 1000px; width: 100%;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    color: #2c0a34;
+    margin: 0 0 12px;
+    font-size: 20px;
+  }
+
+  input, select {
+    width: 100%; box-sizing: border-box;
+    padding: 10px; border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.4);
+    margin: 8px 0;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    color: #2c0a34;
+  }
+
+  button {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #ffffff, #ff9ce3, #a855f7);
+    color: #2c0a34;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  button:hover { opacity: 0.9; transform: scale(1.03); }
+
+  .linkbtn {
+    background: transparent;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #2c0a34;
+  }
+
+  .muted { font-size: 13px; opacity: 0.8; }
+  .error { color: #b91c1c; }
+  .success { color: #166534; }
+
+  #qr {
+    width: 180px; height: 180px;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(8px);
+    border-radius: 12px; padding: 8px;
+    margin: 12px auto;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  table { width:100%; border-collapse:collapse; margin-top:12px; }
+  th, td { padding:8px; border-bottom:1px solid rgba(255,255,255,0.3); font-size:13px; text-align:left; }
+
+  .toggle-btns { display:flex; gap:10px; margin:14px 0; flex-wrap:wrap; }
+  .toggle-btns button.active { background:#2c0a34; color:white; }
+
+  .modal {
+    position:fixed; top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.5);
+    display:none; justify-content:center; align-items:center;
+    z-index:200;
+  }
+  .modal-content {
+    background:rgba(255,255,255,0.95);
+    padding:20px;
+    border-radius:12px;
+    max-width:500px; width:90%;
+    color:#2c0a34;
+    overflow-y:auto;
+    max-height:90vh;
+  }
+  .modal h2 { margin-top:0; }
+  .closeBtn {
+    float:right;
+    background:#ef4444; color:white;
+    border:none; padding:6px 10px;
+    border-radius:6px; cursor:pointer;
+  }
+
+  .tab-buttons { display:flex; gap:6px; margin:10px 0; flex-wrap:wrap; }
+  .tab-buttons button { flex:1; font-size:14px; }
+  .tab-buttons button.active { background:#2c0a34; color:white; }
+
+  .tab-section { display:none; }
+  .tab-section.active { display:block; }
+
+  .search-box { margin:10px 0; }
+  .status-badge { font-weight:bold; padding:2px 6px; border-radius:6px; }
+  .completed { color:green; }
+  .pending { color:orange; }
+
+  /* ---------- Monopoly game styles ---------- */
+  .game-panel { margin-top:12px; display:block; }
+  .game-controls { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+  .rooms-list { max-height:220px; overflow:auto; border:1px solid rgba(0,0,0,0.06); padding:8px; border-radius:8px; background:rgba(255,255,255,0.6); }
+  .board { display:grid; grid-template-columns: repeat(11, 1fr); gap:4px; padding:8px; background:rgba(255,255,255,0.06); border-radius:8px; }
+  .space { min-height:48px; display:flex; align-items:center; justify-content:center; font-size:11px; padding:6px; border-radius:6px; background:rgba(255,255,255,0.12); }
+  .player-token { width:18px;height:18px;border-radius:50%;display:inline-block;margin-left:4px;border:2px solid white; }
+  .players-list { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+  .player-card { padding:8px;border-radius:8px;background:rgba(255,255,255,0.1); }
+  .dice { font-size:18px; font-weight:700; padding:8px 12px; border-radius:8px; background:rgba(255,255,255,0.2); }
+  .room-controls { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+  .small { padding:6px 8px; font-size:13px; border-radius:8px; }
+  .room-code { font-weight:700; letter-spacing:2px; background:rgba(0,0,0,0.05); padding:6px 8px; border-radius:6px; }
+  .you { outline: 2px solid #2c0a34; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <!-- === LOGIN === -->
+  <div class="card" id="authArea">
+    <h1>Login</h1>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p class="muted">Don’t have an account?
+      <button class="linkbtn" onclick="toggleAuth('register')">Create one</button>
+    </p>
+    <p><button class="linkbtn" onclick="showForgotPassword()">Forgot Password?</button></p>
+    <p id="authMsg" class="muted"></p>
+  </div>
+
+  <!-- === FORGOT PASSWORD === -->
+  <div class="card" id="forgotArea" style="display:none">
+    <h1>Reset Password</h1>
+    <input type="email" id="resetEmail" placeholder="Enter your registered email" />
+    <button onclick="resetPassword()">Send Reset Link</button>
+    <p class="muted"><button class="linkbtn" onclick="toggleAuth('login')">Back to Login</button></p>
+    <p id="resetMsg" class="muted"></p>
+  </div>
+
+  <!-- === REGISTER === -->
+  <div class="card" id="registerArea" style="display:none">
+    <h1>Create Account</h1>
+    <input type="text" id="regName" placeholder="Full Name" />
+    <input type="email" id="regEmail" placeholder="Email" />
+    <input type="password" id="regPassword" placeholder="Password" />
+    <input type="text" id="regLevel" placeholder="Clinical Level" />
+    <button onclick="register()">Register</button>
+    <p class="muted">Already have an account?
+      <button class="linkbtn" onclick="toggleAuth('login')">Login</button>
+    </p>
+    <p id="regMsg" class="muted"></p>
+  </div>
+  <!-- === USER PANEL === -->
+  <div class="card" id="userPanel" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h1>DMD CLINICIAN DTR</h1>
+      <button id="settingsBtn" style="padding:6px 10px;font-size:13px;">⚙️ Update Info</button>
+    </div>
+
+    <div class="muted">Signed in as</div>
+    <div id="nameDisplay" style="font-weight:600"></div>
+    <div id="emailDisplay" class="muted"></div>
+    <div id="levelDisplay" class="muted"></div>
+
+    <div id="qr"></div>
+    <button id="logoutBtn" style="background:#ef4444;color:white;">Logout</button>
+
+    <div class="toggle-btns">
+      <button id="dtrBtn" class="active">My DTR Records</button>
+      <button id="caseBtn">My Case Selections</button>
+      <button id="gameBtn">🎲 Monopoly Game</button>
+    </div>
+
+    <div id="dtrSection">
+      <h3>My DTR Records</h3>
+      <table>
+        <thead><tr><th>Date</th><th>Time In</th></tr></thead>
+        <tbody id="myDtrBody"><tr><td colspan="2" class="muted">No records</td></tr></tbody>
+      </table>
+    </div>
+
+    <div id="caseSection" style="display:none">
+      <h3>My Case Selections</h3>
+      <input type="text" id="caseSearch" class="search-box" placeholder="Search cases..." />
+      <button id="openCaseModal" style="margin:6px 0" disabled title="Please Time In first">➕ New Case Selection</button>
+      <table>
+        <thead><tr><th>Type</th><th>Details</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="caseBody"><tr><td colspan="5" class="muted">No cases</td></tr></tbody>
+      </table>
+    </div>
+
+    <!-- === MONOPOLY GAME SECTION === -->
+    <div id="gameSection" style="display:none">
+      <h3>🎲 Monopoly (MVP)</h3>
+      <div class="game-panel">
+        <div class="game-controls">
+          <div>
+            <input id="roomInput" placeholder="Enter room code or leave blank to create" style="width:220px" />
+          </div>
+          <div>
+            <button id="createRoomBtn" class="small" onclick="createGameRoom()">Create Room</button>
+            <button id="joinRoomBtn" class="small" onclick="joinGameRoom()">Join Room</button>
+          </div>
+          <div style="margin-left:auto">
+            <span class="muted">Room:</span> <span id="currentRoom" class="room-code">—</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;">
+          <div style="flex:1; min-width:320px;">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div><strong>Players</strong></div>
+              <div>
+                <button id="startGameBtn" class="small" onclick="startGame()" disabled>Start Game</button>
+                <button id="leaveRoomBtn" class="small" onclick="leaveRoom()" style="background:#ef4444;color:white">Leave</button>
+              </div>
+            </div>
+            <div id="playersContainer" class="players-list" style="margin-top:8px;">
+              <!-- Player cards -->
+            </div>
+
+            <div class="room-controls">
+              <div class="muted">You:</div> <div id="youLabel" class="muted">—</div>
+              <div class="muted">Turn:</div> <div id="turnLabel" class="muted">—</div>
+              <div class="muted">Dice:</div> <div id="diceLabel" class="dice">—</div>
+            </div>
+
+            <div style="margin-top:8px;">
+              <button id="rollBtn" class="small" onclick="rollDice()" disabled>Roll Dice</button>
+              <button id="endTurnBtn" class="small" onclick="endTurn()" disabled>End Turn</button>
+            </div>
+
+            <div style="margin-top:10px;">
+              <strong>Room Log</strong>
+              <div id="roomLog" style="max-height:160px; overflow:auto; background:rgba(255,255,255,0.06); padding:8px; border-radius:8px; margin-top:6px;"></div>
+            </div>
+          </div>
+
+          <div style="flex:1; min-width:380px;">
+            <div><strong>Board</strong></div>
+            <div id="board" class="board" style="margin-top:8px;">
+              <!-- Board spaces will be generated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === SETTINGS MODAL === -->
+  <div id="settingsModal" class="modal">
+    <div class="modal-content">
+      <button id="closeModal" class="closeBtn">✖</button>
+      <h2>Request Update</h2>
+      <label>Field:
+        <select id="fieldSelect">
+          <option value="name">Name</option>
+          <option value="email">Email</option>
+          <option value="password">Password</option>
+          <option value="clinicalLevel">Clinical Level</option>
+        </select>
+      </label>
+      <br><br>
+      <input type="text" id="newValue" placeholder="Enter new value" />
+      <button onclick="submitUpdate()">Submit Request</button>
+      <p id="updateStatus" class="muted"></p>
+    </div>
+  </div>
+  <!-- === CASE MODAL === -->
+  <div id="caseModal" class="modal">
+    <div class="modal-content">
+      <button id="closeCaseModal" class="closeBtn">✖</button>
+      <h2>Case Selection</h2>
+
+      <div class="tab-buttons">
+        <button class="tabBtn active" data-tab="livePatient">Live Patient</button>
+        <button class="tabBtn" data-tab="typodonts">Typodonts</button>
+        <button class="tabBtn" data-tab="cast">CAST</button>
+      </div>
+
+      <!-- Live Patient -->
+      <div id="livePatient" class="tab-section active">
+        <label>Clinician Name</label>
+        <input type="text" id="lpClinician" disabled />
+        <label>Patient Name</label>
+        <input type="text" id="lpPatient" />
+        <label>Case Procedure</label>
+        <input type="text" id="lpProcedure" />
+        <label>Mastercard No. (optional)</label>
+        <input type="text" id="lpMaster" />
+        <label>Clinical Instructor</label>
+        <input type="text" value="Pending (Assigned by Admin)" disabled />
+      </div>
+
+      <!-- Typodonts -->
+      <div id="typodonts" class="tab-section">
+        <label>Case Type</label>
+        <select id="typoCaseType">
+          <option value="">-- Select --</option>
+          <option value="pfm">PFM/FPD</option>
+          <option value="restorative">Restorative</option>
+        </select>
+
+        <div id="pfmFields" style="display:none; margin-top:10px;">
+          <label>PFM/FPD</label>
+          <select id="typoPfm">
+            <option value="">-- Select --</option>
+            <option>Anterior</option>
+            <option>Posterior</option>
+          </select>
+          <label>Mastercard No. (optional)</label>
+          <input type="text" id="typoMasterPfm" />
+          <label>Clinical Instructor</label>
+          <input type="text" value="Pending (Assigned by Admin)" disabled />
+        </div>
+
+        <div id="restFields" style="display:none; margin-top:10px;">
+          <label>Restorative (type manually)</label>
+          <input type="text" id="typoRest" />
+          <label>Mastercard No. (optional)</label>
+          <input type="text" id="typoMasterRest" />
+          <label>Clinical Instructor</label>
+          <input type="text" value="Pending (Assigned by Admin)" disabled />
+        </div>
+      </div>
+
+      <!-- CAST -->
+      <div id="cast" class="tab-section">
+        <label>RPD or CD</label>
+        <select id="castType">
+          <option value="">-- Select --</option>
+          <option>RPD</option>
+          <option>CD</option>
+        </select>
+        <label>Mastercard No. (optional)</label>
+        <input type="text" id="castMaster" />
+        <label>Clinical Instructor</label>
+        <input type="text" value="Pending (Assigned by Admin)" disabled />
+      </div>
+
+      <br>
+      <button onclick="submitCase()">Submit Case</button>
+      <p id="caseStatus" class="muted"></p>
+    </div>
+  </div>
+
+  <!-- === SCRIPTS === -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-database-compat.js"></script>
+
+  <script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBYYZrsZECXM2UpW4-38sGQLaPqAqkjSWI",
+    authDomain: "dtr-project-66048.firebaseapp.com",
+    databaseURL: "https://dtr-project-66048-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "dtr-project-66048",
+    storageBucket: "dtr-project-66048.appspot.com",
+    messagingSenderId: "271445506225",
+    appId: "1:271445506225:web:fcb04d0454e1302de14a90"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.database();
+
+  // === UI TOGGLES ===
+  function toggleAuth(mode) {
+    document.getElementById("authArea").style.display = (mode === "register") ? "none" : "block";
+    document.getElementById("registerArea").style.display = (mode === "register") ? "block" : "none";
+    document.getElementById("forgotArea").style.display = "none";
+  }
+  function showForgotPassword() {
+    document.getElementById("authArea").style.display = 'none';
+    document.getElementById("registerArea").style.display = 'none';
+    document.getElementById("forgotArea").style.display = 'block';
+  }
+
+  // === FORGOT PASSWORD ===
+  async function resetPassword() {
+    const email = document.getElementById('resetEmail').value.trim();
+    const msg = document.getElementById('resetMsg');
+    if (!email) { msg.textContent = "Please enter your email."; msg.className = "error"; return; }
+    try {
+      await auth.sendPasswordResetEmail(email);
+      msg.textContent = "✅ Password reset link sent! Check your inbox.";
+      msg.className = "success";
+    } catch (e) {
+      msg.textContent = e.message;
+      msg.className = "error";
+    }
+  }
+
+  // === LOGIN / REGISTER ===
+  async function login() {
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
+    const msg = document.getElementById('authMsg');
+    try { await auth.signInWithEmailAndPassword(email, pass); }
+    catch (e) { msg.textContent = e.message; msg.className = "error"; }
+  }
+
+  async function register() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const pass = document.getElementById('regPassword').value;
+    const level = document.getElementById('regLevel').value.trim();
+    const msg = document.getElementById('regMsg');
+    try {
+      const cred = await auth.createUserWithEmailAndPassword(email, pass);
+      const uid = cred.user.uid;
+      await db.ref('users/' + uid + '/profile').set({ name, email, clinicalLevel: level });
+      msg.textContent = "Account created! Redirecting...";
+      msg.className = "success";
+      await auth.signInWithEmailAndPassword(email, pass);
+    } catch (e) {
+      msg.textContent = e.message; msg.className = "error";
+    }
+  }
+
+  document.getElementById('logoutBtn').onclick = () => { leaveRoom(); auth.signOut(); };
+
+  // === LOAD DTR & CASES ===
+  async function loadUserDTR(uid) {
+    const tbody = document.getElementById('myDtrBody');
+    const snap = await db.ref('users/' + uid + '/dtr').get();
+    tbody.innerHTML = "";
+    if (!snap.exists()) { tbody.innerHTML = "<tr><td colspan='2' class='muted'>No records</td></tr>"; return; }
+    snap.forEach(child => {
+      const date = child.key; const rec = child.val();
+      tbody.innerHTML += `<tr><td>${date}</td><td>${rec.timeIn || '-'}</td></tr>`;
+    });
+  }
+
+  async function loadUserCases(uid) {
+  const tbody = document.getElementById('caseBody');
+  tbody.innerHTML = "<tr><td colspan='5' class='muted'>Loading cases...</td></tr>";
+
+  // Remove any existing listener before adding a new one (prevents duplicates)
+  if (window.userCasesListener) {
+    db.ref('userCases/' + uid).off('value', window.userCasesListener);
+  }
+
+  // Define a listener function
+  window.userCasesListener = db.ref('userCases/' + uid).on('value', snap => {
+    tbody.innerHTML = "";
+    const seen = new Set();
+
+    if (!snap.exists()) {
+      tbody.innerHTML = "<tr><td colspan='5' class='muted'>No cases</td></tr>";
+      return;
+    }
+
+    snap.forEach(child => {
+      const cid = child.key;
+      if (seen.has(cid)) return;
+      seen.add(cid);
+
+      const c = child.val() || {};
+      const date = c.timestamp ? new Date(c.timestamp).toLocaleString() : "-";
+      const status = c.status === "completed"
+        ? `<span class='status-badge completed'>✅ Completed</span>`
+        : `<span class='status-badge pending'>Pending</span>`;
+      const action = c.status === "completed"
+        ? "—"
+        : `<button onclick="markCaseComplete('${uid}','${cid}', event)">Mark Completed</button>`;
+
+      tbody.innerHTML += `
+        <tr id="case-${cid}">
+          <td>${c.type || "-"}</td>
+          <td>${c.details || ""}<br><span class='muted'>Instructor: ${c.instructor || "Pending"}</span></td>
+          <td>${date}</td>
+          <td>${status}</td>
+          <td>${action}</td>
+        </tr>`;
+    });
+
+    applyCaseSearch();
+  });
+  }
+
+  function applyCaseSearch() {
+    const input = document.getElementById('caseSearch').value.toLowerCase();
+    const rows = document.querySelectorAll("#caseBody tr");
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      row.style.display = text.includes(input) ? "" : "none";
+    });
+  }
+  document.getElementById('caseSearch').addEventListener('input', applyCaseSearch);
+
+    // ===== MARK CASE AS COMPLETED (User side only) =====
+let markInProgress = false;
+
+async function markCaseComplete(uid, cid, event) {
+  if (markInProgress) return;
+  markInProgress = true;
+
+  try {
+    const btn = event?.target;
+    if (btn) {
+      btn.disabled = true;
+      btn.innerText = "⏳ Processing...";
+    }
+
+    // ✅ Only update the user's own copy
+    const caseRef = db.ref(`userCases/${uid}/${cid}`);
+    const caseSnap = await caseRef.get();
+
+    if (!caseSnap.exists()) {
+      showToast("⚠️ Case not found on user side", "warning");
+      return;
+    }
+
+    const caseData = caseSnap.val();
+
+    // ✅ Update status only in user's node, not admin's
+    await caseRef.update({
+      status: "completed",
+      completedAt: Date.now()
+    });
+
+    // 🚫 Do NOT touch admin nodes like `cases/` or `doneAssign/`
+    showToast("✅ Case marked as completed (user only)", "success");
+
+  } catch (e) {
+    console.error("Mark complete error:", e);
+    showToast("❌ Failed to mark complete", "error");
+  } finally {
+    const btn = event?.target;
+    if (btn) {
+      btn.disabled = false;
+      btn.innerText = "Mark Completed";
+    }
+    markInProgress = false;
+  }
+}
+  
+  // === AUTH STATE LISTENER ===
+auth.onAuthStateChanged(async user => {
+  if (user) {
+    document.getElementById('authArea').style.display = 'none';
+    document.getElementById('registerArea').style.display = 'none';
+    document.getElementById('forgotArea').style.display = 'none';
+    document.getElementById('userPanel').style.display = 'block';
+
+    const profileSnap = await db.ref('users/' + user.uid + '/profile').get();
+    const profile = profileSnap.exists() ? profileSnap.val() : {};
+    document.getElementById('nameDisplay').textContent = profile.name || user.email;
+    document.getElementById('emailDisplay').textContent = profile.email || '';
+    document.getElementById('levelDisplay').textContent = profile.clinicalLevel ? `Clinical Level: ${profile.clinicalLevel}` : '';
+    document.getElementById('lpClinician').value = profile.name || user.email;
+
+    const qrDiv = document.getElementById('qr');
+    qrDiv.innerHTML = "";
+    new QRCode(qrDiv, { text: user.uid, width: 160, height: 160 });
+
+    const today = new Date().toISOString().slice(0,10);
+    const caseBtn = document.getElementById('openCaseModal');
+    db.ref('users/' + user.uid + '/dtr/' + today).on('value', snap => {
+      if (snap.exists() && snap.val().timeIn) {
+        caseBtn.disabled = false;
+        caseBtn.style.opacity = "1";
+        caseBtn.style.cursor = "pointer";
+        caseBtn.title = "Add a new case";
+      } else {
+        caseBtn.disabled = true;
+        caseBtn.style.opacity = "0.5";
+        caseBtn.style.cursor = "not-allowed";
+        caseBtn.title = "Please Time In first";
+      }
+    });
+
+    // ✅ Load user data
+    loadUserDTR(user.uid);
+    loadUserCases(user.uid);
+
+    // Save current user for game usage
+    window.currentUser = { uid: user.uid, email: user.email, name: profile.name || user.email };
+
+  } else {
+    document.getElementById('authArea').style.display = 'block';
+    document.getElementById('registerArea').style.display = 'none';
+    document.getElementById('forgotArea').style.display = 'none';
+    document.getElementById('userPanel').style.display = 'none';
+    window.currentUser = null;
+    // Ensure leaving room when logged out
+    leaveRoom();
+  }
+});
+
+  // === SETTINGS & CASE MODALS ===
+  const settingsModal = document.getElementById('settingsModal');
+  document.getElementById('settingsBtn').onclick = () => settingsModal.style.display = 'flex';
+  document.getElementById('closeModal').onclick = () => settingsModal.style.display = 'none';
+  const caseModal = document.getElementById('caseModal');
+  document.getElementById('openCaseModal').onclick = () => caseModal.style.display = 'flex';
+  document.getElementById('closeCaseModal').onclick = () => caseModal.style.display = 'none';
+  window.onclick = e => {
+    if (e.target === settingsModal) settingsModal.style.display = 'none';
+    if (e.target === caseModal) caseModal.style.display = 'none';
+  };
+
+  async function submitUpdate() {
+    const field = document.getElementById('fieldSelect').value;
+    const value = document.getElementById('newValue').value.trim();
+    const status = document.getElementById('updateStatus');
+    const user = auth.currentUser;
+    if (!user) return;
+    if (!value) { status.textContent = "Please enter a value."; status.className = "error"; return; }
+    const reqRef = db.ref('updateRequests/' + user.uid).push();
+    await reqRef.set({ field, value, status: "pending", timestamp: Date.now() });
+    status.textContent = "Request submitted."; status.className = "success";
+    document.getElementById('newValue').value = "";
+  }
+
+  // === CASE TAB LOGIC ===
+  document.querySelectorAll('.tabBtn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.tabBtn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    };
+  });
+
+  const typoCaseType = document.getElementById('typoCaseType');
+  const pfmFields = document.getElementById('pfmFields');
+  const restFields = document.getElementById('restFields');
+  typoCaseType.onchange = () => {
+    if (typoCaseType.value === "pfm") { pfmFields.style.display = "block"; restFields.style.display = "none"; }
+    else if (typoCaseType.value === "restorative") { restFields.style.display = "block"; pfmFields.style.display = "none"; }
+    else { pfmFields.style.display = "none"; restFields.style.display = "none"; }
+  };
+
+  async function submitCase() {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const status = document.getElementById('caseStatus');
+  let caseData = {
+    type: "",
+    details: "",
+    instructor: "Pending",
+    timestamp: Date.now(),
+    status: "pending"
+  };
+
+  const activeTab = document.querySelector('.tabBtn.active').dataset.tab;
+
+  if (activeTab === "livePatient") {
+    caseData.type = "Live Patient";
+    caseData.details = `Patient: ${document.getElementById('lpPatient').value}, Procedure: ${document.getElementById('lpProcedure').value}, Mastercard: ${document.getElementById('lpMaster').value || "N/A"}`;
+  } 
+  else if (activeTab === "typodonts") {
+    caseData.type = "Typodonts";
+    if (typoCaseType.value === "pfm") {
+      caseData.details = `PFM/FPD: ${document.getElementById('typoPfm').value || "N/A"}, Mastercard: ${document.getElementById('typoMasterPfm').value || "N/A"}`;
+    } else if (typoCaseType.value === "restorative") {
+      caseData.details = `Restorative: ${document.getElementById('typoRest').value || "N/A"}, Mastercard: ${document.getElementById('typoMasterRest').value || "N/A"}`;
+    } else {
+      status.textContent = "Please select Typodonts case type.";
+      status.className = "error";
+      return;
+    }
+  } 
+  else if (activeTab === "cast") {
+    caseData.type = "CAST";
+    caseData.details = `Type: ${document.getElementById('castType').value || "N/A"}, Mastercard: ${document.getElementById('castMaster').value || "N/A"}`;
+  }
+
+  // ✅ Generate unique ID for the case
+  const caseRef = db.ref('cases/' + user.uid).push();
+  const caseId = caseRef.key;
+
+  // ✅ Save to Admin Panel
+  await caseRef.set(caseData);
+
+  // ✅ Also save to User Panel
+  await db.ref(`userCases/${user.uid}/${caseId}`).set(caseData);
+
+  // ✅ UI feedback
+  status.textContent = "Case submitted successfully!";
+  status.className = "success";
+
+  // ✅ Reload and close modal
+  await loadUserCases(user.uid);
+  setTimeout(() => {
+    caseModal.style.display = 'none';
+    status.textContent = "";
+  }, 1000);
+    }
+
+  // === SECTION TOGGLES ===
+  const dtrBtn = document.getElementById('dtrBtn');
+  const caseBtn = document.getElementById('caseBtn');
+  const gameBtn = document.getElementById('gameBtn');
+  dtrBtn.onclick = () => {
+    dtrBtn.classList.add('active');
+    caseBtn.classList.remove('active');
+    gameBtn.classList.remove('active');
+    document.getElementById('dtrSection').style.display = 'block';
+    document.getElementById('caseSection').style.display = 'none';
+    document.getElementById('gameSection').style.display = 'none';
+  };
+  caseBtn.onclick = () => {
+    caseBtn.classList.add('active');
+    dtrBtn.classList.remove('active');
+    gameBtn.classList.remove('active');
+    document.getElementById('caseSection').style.display = 'block';
+    document.getElementById('dtrSection').style.display = 'none';
+    document.getElementById('gameSection').style.display = 'none';
+  };
+  gameBtn.onclick = () => {
+    gameBtn.classList.add('active');
+    dtrBtn.classList.remove('active');
+    caseBtn.classList.remove('active');
+    document.getElementById('gameSection').style.display = 'block';
+    document.getElementById('dtrSection').style.display = 'none';
+    document.getElementById('caseSection').style.display = 'none';
+    initBoard(); // generate board when opening game
+    refreshRoomUI(); // refresh UI state
+  };
+
+  /**********************
+   * Monopoly Game Logic
+   **********************/
+  // Minimal, real-time multiplayer via Realtime Database
+  const BOARD_SIZE = 40; // standard monopoly spaces count
+  // Utility: generate 6-char room code
+  function genRoomCode() {
+    const chars = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+    let s = '';
+    for (let i=0;i<6;i++) s += chars[Math.floor(Math.random()*chars.length)];
+    return s;
+  }
+
+  // GAME STATE (local)
+  window.gameState = {
+    roomId: null,
+    roomRef: null,
+    unsubscribe: null,
+    localPlayerId: null,
+    playerColorPool: ['#e11d48','#06b6d4','#f59e0b','#10b981','#7c3aed','#ef4444']
+  };
+
+  function logRoom(msg) {
+    const el = document.getElementById('roomLog');
+    const p = document.createElement('div'); p.textContent = `${new Date().toLocaleTimeString()} — ${msg}`;
+    el.prepend(p);
+  }
+
+  // ---------- Room management ----------
+  async function createGameRoom() {
+    if (!window.currentUser) { alert('Please login first'); return; }
+    const code = genRoomCode();
+    const roomRef = db.ref('monopolyRooms/' + code);
+    const snap = await roomRef.get();
+    if (snap.exists()) {
+      // rare collision — try again
+      return createGameRoom();
+    }
+    const playerObj = {
+      id: window.currentUser.uid,
+      name: window.currentUser.name || window.currentUser.email,
+      pos: 0,
+      money: 1500,
+      joinedAt: Date.now(),
+      color: window.gameState.playerColorPool[0]
+    };
+    await roomRef.set({
+      owner: window.currentUser.uid,
+      createdAt: Date.now(),
+      players: { [window.currentUser.uid]: playerObj },
+      turnOrder: [window.currentUser.uid],
+      currentTurnIndex: 0,
+      started: false,
+      lastActionAt: Date.now()
+    });
+    window.gameState.roomId = code;
+    window.gameState.roomRef = roomRef;
+    attachRoomListener(code);
+    document.getElementById('roomInput').value = code;
+    document.getElementById('currentRoom').textContent = code;
+    logRoom('Room created — code: ' + code);
+    refreshRoomUI();
+  }
+
+    async function joinGameRoom() {
+    if (!window.currentUser) { alert('Please login first'); return; }
+    const code = document.getElementById('roomInput').value.trim().toUpperCase();
+    if (!code) { alert('Enter room code or create a room first'); return; }
+    const roomRef = db.ref('monopolyRooms/' + code);
+    const snap = await roomRef.get();
+    if (!snap.exists()) { alert('Room not found'); return; }
+    const room = snap.val();
+
+    // prevent duplicate join
+    if (room.players && room.players[window.currentUser.uid]) {
+      window.gameState.roomId = code;
+      window.gameState.roomRef = roomRef;
+      attachRoomListener(code);
+      document.getElementById('currentRoom').textContent = code;
+      logRoom('Rejoined room: ' + code);
+      refreshRoomUI();
+      return;
+    }
+
+    // add player
+    const players = room.players || {};
+    const color = window.gameState.playerColorPool[Object.keys(players).length % window.gameState.playerColorPool.length];
+    const playerObj = {
+      id: window.currentUser.uid,
+      name: window.currentUser.name || window.currentUser.email,
+      pos: 0,
+      money: 1500,
+      joinedAt: Date.now(),
+      color
+    };
+    await roomRef.child('players/' + window.currentUser.uid).set(playerObj);
+
+    // update turn order
+    const updatedOrder = room.turnOrder || [];
+    if (!updatedOrder.includes(window.currentUser.uid)) updatedOrder.push(window.currentUser.uid);
+    await roomRef.child('turnOrder').set(updatedOrder);
+    window.gameState.roomId = code;
+    window.gameState.roomRef = roomRef;
+    attachRoomListener(code);
+    document.getElementById('currentRoom').textContent = code;
+    logRoom('Joined room: ' + code);
+    refreshRoomUI();
+  }
+
+  async function leaveRoom() {
+    // Remove local listeners and optionally remove player from room
+    try {
+      const gid = window.gameState.roomId;
+      if (!gid) return;
+      const roomRef = db.ref('monopolyRooms/' + gid);
+      // remove player node
+      if (window.currentUser) {
+        await roomRef.child('players/' + window.currentUser.uid).remove();
+        // remove from turnOrder
+        const tSnap = await roomRef.child('turnOrder').get();
+        if (tSnap.exists()) {
+          const order = tSnap.val().filter(id => id !== window.currentUser.uid);
+          await roomRef.child('turnOrder').set(order);
+        }
+        // if owner left, transfer ownership or delete room
+        const ownerSnap = await roomRef.child('owner').get();
+        if (ownerSnap.exists() && ownerSnap.val() === window.currentUser.uid) {
+          const playersSnap = await roomRef.child('players').get();
+          if (playersSnap.exists()) {
+            const keys = Object.keys(playersSnap.val());
+            if (keys.length > 0) {
+              await roomRef.child('owner').set(keys[0]);
+            } else {
+              // no players left — remove room
+              await roomRef.remove();
+            }
+          } else {
+            await roomRef.remove();
+          }
+        }
+      }
+      // detach local listener
+      if (window.gameState.unsubscribe) {
+        window.gameState.unsubscribe();
+        window.gameState.unsubscribe = null;
+      }
+      window.gameState.roomId = null;
+      window.gameState.roomRef = null;
+      document.getElementById('currentRoom').textContent = '—';
+      document.getElementById('playersContainer').innerHTML = '';
+      document.getElementById('roomLog').innerHTML = '';
+      document.getElementById('diceLabel').textContent = '—';
+      document.getElementById('turnLabel').textContent = '—';
+      document.getElementById('youLabel').textContent = '—';
+      refreshRoomUI();
+    } catch (e) {
+      console.error('leaveRoom error', e);
+    }
+  }
+
+  // ---------- Room listener ----------
+  function attachRoomListener(roomId) {
+    if (window.gameState.unsubscribe) {
+      window.gameState.unsubscribe();
+    }
+    const rRef = db.ref('monopolyRooms/' + roomId);
+    const callback = rRef.on('value', snap => {
+      if (!snap.exists()) {
+        logRoom('Room was closed.');
+        leaveRoom();
+        return;
+      }
+      const room = snap.val();
+      renderRoom(room);
+    }, err => {
+      console.error('Room listener error', err);
+    });
+    // store unsubscribe function
+    window.gameState.unsubscribe = () => rRef.off('value', callback);
+    window.gameState.roomRef = rRef;
+  }
+
+  function refreshRoomUI() {
+    const gid = window.gameState.roomId;
+    document.getElementById('startGameBtn').disabled = true;
+    document.getElementById('rollBtn').disabled = true;
+    document.getElementById('endTurnBtn').disabled = true;
+    // if in room, allow certain buttons as role
+    if (gid && window.currentUser) {
+      db.ref('monopolyRooms/' + gid).get().then(snap => {
+        if (!snap.exists()) return;
+        const room = snap.val();
+        if (room.owner === window.currentUser.uid && (!room.started || room.started === false)) {
+          document.getElementById('startGameBtn').disabled = false;
+        }
+        document.getElementById('youLabel').textContent = window.currentUser.name || window.currentUser.email;
+      });
+    }
+  }
+
+  // ---------- Render room / players ----------
+  function renderRoom(room) {
+    if (!room) return;
+    // show players
+    const pc = document.getElementById('playersContainer');
+    pc.innerHTML = '';
+    const players = room.players || {};
+    Object.keys(players).forEach((pid, idx) => {
+      const p = players[pid];
+      const div = document.createElement('div');
+      div.className = 'player-card' + (pid === (window.currentUser && window.currentUser.uid) ? ' you' : '');
+      div.innerHTML = `<div style="display:flex;align-items:center;gap:8px;"><div style="width:14px;height:14px;background:${p.color || '#999'};border-radius:50%"></div><div><strong>${p.name}</strong></div></div>
+        <div class="muted">Pos: <span id="pos-${pid}">${p.pos || 0}</span></div>
+        <div class="muted">Money: ₱<span id="money-${pid}">${p.money || 0}</span></div>`;
+      pc.appendChild(div);
+    });
+
+    // update turn label
+    const turnIndex = room.currentTurnIndex || 0;
+    const turnOrder = room.turnOrder || [];
+    const currentTurnPlayer = turnOrder[turnIndex] || null;
+    document.getElementById('turnLabel').textContent = currentTurnPlayer ? (room.players && room.players[currentTurnPlayer] ? room.players[currentTurnPlayer].name : currentTurnPlayer) : '-';
+
+    // update dice display if present
+    if (room.lastDice) {
+      document.getElementById('diceLabel').textContent = `${room.lastDice[0]} + ${room.lastDice[1]} = ${room.lastDice[0]+room.lastDice[1]}`;
+    } else {
+      document.getElementById('diceLabel').textContent = '—';
+    }
+
+    // enable roll button if it's our turn and game started
+    if (window.currentUser && room.started && currentTurnPlayer === window.currentUser.uid) {
+      document.getElementById('rollBtn').disabled = false;
+      document.getElementById('endTurnBtn').disabled = false;
+    } else {
+      document.getElementById('rollBtn').disabled = true;
+      document.getElementById('endTurnBtn').disabled = true;
+    }
+
+    // start button state
+    if (room.owner === (window.currentUser && window.currentUser.uid) && !room.started) {
+      document.getElementById('startGameBtn').disabled = false;
+    } else {
+      document.getElementById('startGameBtn').disabled = true;
+    }
+
+    // update currentRoom UI
+    document.getElementById('currentRoom').textContent = window.gameState.roomId || '—';
+
+    // update tokens on board
+    updateBoardTokens(room);
+  }
+
+  // ---------- Start game ----------
+  async function startGame() {
+    const gid = window.gameState.roomId;
+    if (!gid) return alert('Join a room first');
+    const roomRef = db.ref('monopolyRooms/' + gid);
+    const snap = await roomRef.get();
+    if (!snap.exists()) return;
+    const room = snap.val();
+    if (room.owner !== window.currentUser.uid) return alert('Only owner can start the game');
+    // initialize simple started flag and ensure turnOrder exists
+    const order = room.turnOrder && room.turnOrder.length > 0 ? room.turnOrder : Object.keys(room.players || {});
+    await roomRef.update({ started: true, turnOrder: order, currentTurnIndex: 0, lastActionAt: Date.now() });
+    logRoom('Game started');
+  }
+
+  // ---------- Dice roll ----------
+  async function rollDice() {
+    const gid = window.gameState.roomId;
+    if (!gid) return;
+    const roomRef = db.ref('monopolyRooms/' + gid);
+    const snap = await roomRef.get();
+    if (!snap.exists()) return;
+    const room = snap.val();
+    const turnIndex = room.currentTurnIndex || 0;
+    const turnOrder = room.turnOrder || [];
+    const currentTurnPlayer = turnOrder[turnIndex];
+    if (currentTurnPlayer !== window.currentUser.uid) return alert('Not your turn');
+
+    // generate dice
+    const d1 = Math.floor(Math.random()*6)+1;
+    const d2 = Math.floor(Math.random()*6)+1;
+    const total = d1 + d2;
+
+    // compute new position for the player
+    const player = (room.players && room.players[window.currentUser.uid]) || null;
+    const newPos = ((player && player.pos) || 0) + total;
+    const wrappedPos = newPos % BOARD_SIZE;
+
+    // update player position and lastDice
+    const updates = {};
+    updates[`players/${window.currentUser.uid}/pos`] = wrappedPos;
+    updates['lastDice'] = [d1, d2];
+    updates['lastActionAt'] = Date.now();
+
+    await roomRef.update(updates);
+    logRoom(`${window.currentUser.name || window.currentUser.email} rolled ${d1} + ${d2} = ${total} and moved to ${wrappedPos}`);
+
+    // Note: we don't auto-advance turn here until user clicks End Turn (simple)
+  }
+
+  // ---------- End turn ----------
+  async function endTurn() {
+    const gid = window.gameState.roomId;
+    if (!gid) return;
+    const roomRef = db.ref('monopolyRooms/' + gid);
+    const snap = await roomRef.get();
+    if (!snap.exists()) return;
+    const room = snap.val();
+    const turnIndex = room.currentTurnIndex || 0;
+    const order = room.turnOrder || [];
+    const nextIndex = (turnIndex + 1) % order.length;
+    await roomRef.update({ currentTurnIndex: nextIndex, lastActionAt: Date.now() });
+    logRoom('Turn passed to next player');
+  }
+
+  // ---------- Board generation & rendering ----------
+  function initBoard() {
+    const boardEl = document.getElementById('board');
+    boardEl.innerHTML = '';
+    // Simple 11x11-like layout (monopoly board perimeter simulation)
+    // We'll create 40 spaces and layout them in a grid 11 columns so it looks okay
+    for (let i=0;i<BOARD_SIZE;i++) {
+      const div = document.createElement('div');
+      div.className = 'space';
+      div.id = 'space-' + i;
+      div.innerHTML = `<div style="text-align:center;"><div style="font-size:10px">#${i}</div><div id="tokens-${i}" style="margin-top:6px;"></div></div>`;
+      boardEl.appendChild(div);
+    }
+    // fill rest cells to make a rectangular grid (11x11 = 121 cells) — add empty placeholders for layout balance
+    const placeholders = (11*11) - BOARD_SIZE;
+    for (let p=0;p<placeholders;p++) {
+      const div = document.createElement('div'); div.style.visibility = 'hidden'; div.style.minHeight='48px';
+      boardEl.appendChild(div);
+    }
+  }
+
+  function updateBoardTokens(room) {
+    // clear all tokens
+    for (let i=0;i<BOARD_SIZE;i++) {
+      const tokensEl = document.getElementById('tokens-' + i);
+      if (tokensEl) tokensEl.innerHTML = '';
+    }
+    const players = room.players || {};
+    Object.keys(players).forEach(pid => {
+      const p = players[pid];
+      const pos = p.pos || 0;
+      const tokensEl = document.getElementById('tokens-' + pos);
+      if (tokensEl) {
+        const el = document.createElement('span');
+        el.className = 'player-token';
+        el.style.background = p.color || '#999';
+        el.title = p.name;
+        el.style.borderColor = 'white';
+        tokensEl.appendChild(el);
+      }
+    });
+  }
+
+  // simple helper to append log and keep scroll
+  function addLog(msg) {
+    const log = document.getElementById('roomLog');
+    const d = document.createElement('div'); d.textContent = msg;
+    log.prepend(d);
+  }
+
+  // ---------- small utility to show toast-like messages ----------
+  function showToast(msg, type='info') {
+    // Very small inline toast using alert for MVP; can be replaced
+    console.log('[toast]', type, msg);
+  }
+
+  // ---------- small heartbeat cleanup (if owner not present, etc.) ----------
+  // optional: can add GC to remove empty rooms after long inactivity (not implemented for safety)
+
+  // init board on load
+  initBoard();
+
+  // ---------- keep room UI updated periodically ----------
+  setInterval(() => {
+    if (window.gameState.roomId) {
+      db.ref('monopolyRooms/' + window.gameState.roomId).get().then(snap => {
+        if (snap.exists()) renderRoom(snap.val());
+      }).catch(e => {});
+    }
+  }, 4000);
+
+  </script>
+
+</script>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  footer.page-footer {
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 13px;
+    color: #5a437c;
+    opacity: 0.85;
+    margin-top: auto;
+  }
+</style>
+
+<footer class="page-footer">
+  Created by <strong>NZM</strong><br>
+  &copy; 2025 | To God Be the Glory
+</footer>
+
+</body>
+</html>
