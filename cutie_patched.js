@@ -7,7 +7,7 @@
 */
 
 (() => {
-  const PLAYLIST_URL = "https://raw.githubusercontent.com/PRENDLYMADAPAKER/ANG-KALAT-MO/refs/heads/main/IPTV%20PREMIUM";
+  const PLAYLIST_URL = "https://raw.githubusercontent.com/PRENDLYMADAPAKER/ANG-KALAT-MO/refs/heads/main/IPTV%20PREMIUM.m3u";
 
   // Helpers
   const $ = id => document.getElementById(id);
