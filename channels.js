@@ -457,4 +457,222 @@ const combinedChannels = [
     logo: "https://images.sr.roku.com/idType/roku/context/trc/id/c4bdfe6fd751590e9d096b5de264bba1/https%3A%2F%2Fimage.roku.com%2Fbh-uploads%2Fproduction%2FinfoHUDLogo%2F1678995051754_image_hud1_260x147.png",
     category: "Movie Channels"
   }
+  {
+    name: "ScreamFlix",
+    type: "hls",
+    url: "https://jungotvstream.chanall.tv/jungotv/screamflix/playlist_720p.m3u8",
+    logo: "https://i.imgur.com/Ym32WqZ.png",
+    category: "Movie Channels"
+  },
+  {
+    name: "Showtime",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/SHOWTIME/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Showtime 2",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/SHOWTIME_2/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-2-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Showtime Extreme",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/SHOWTIME_EXTREME/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-extreme-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Showtime Next",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/SHOWTIME_NEXT/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-next-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Showtime West",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/SHOWTIME_WEST/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Showtime Women",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/SHOWTIME_WOMEN/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-women-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Sony Movie Channel",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/Sony_Movie_Channel/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/sony-movie-channel-hz-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Start TV",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/Start_Tv/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/start-tv-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Starz",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/STARZ/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Starz Comedy",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/STARZ_COMEDY/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-comedy-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Starz Edge",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/STARZ_EDGE/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-edge-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Starz Encore Action",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/STARZ_ENCORE_ACTION/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-encore-action-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Starz Encore Classic",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/STARZ_ENCORE_CLASSIC/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-encore-classic-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Starz Encore Westerns",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/STARZ_ENCORE_WESTERNS/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-encore-westerns-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "Starz West",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/STARZ_WEST/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "SundanceTV",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/SUNDANCE/index.m3u8",
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s16108_dark_360w_270h.png",
+    category: "Movie Channels"
+  },
+  {
+    name: "SYFY",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/SYFY/index.m3u8",
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/syfy-us.png?raw=true",
+    category: "Movie Channels"
+  },
+  {
+    name: "TAP Action Flix",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/cg_tapactionflix_hd1/default/index.mpd",
+    logo: "https://i.imgur.com/w64PvvF.png",
+    category: "Movie Channels",
+    clearKey: { "bee1066160c0424696d9bf99ca0645e3": "f5b72bf3b89b9848de5616f37de040b7" }
+  },
+  {
+    name: "TAP Edge",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/dr_tapedge/default/index.mpd",
+    logo: "https://i.imgur.com/e7xA7qK.png",
+    category: "Movie Channels",
+    clearKey: { "4553f7e8011f411fb625cefc39274300": "98f2f1d153367e84b5d559dc9dfb9a35" }
+  },
+  {
+    name: "TAP Movies",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_tapmovies_hd1/default/index.mpd",
+    logo: "https://i.imgur.com/3RVA5mV.png",
+    category: "Movie Channels",
+    clearKey: { "71cbdf02b595468bb77398222e1ade09": "c3f2aa420b8908ab8761571c01899460" }
+  },
+  {
+    name: "TAP TV",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/cg_taptv_sd/default/index.mpd",
+    logo: "https://i.imgur.com/J6Olkop.png",
+    category: "Movie Channels",
+    clearKey: { "f6804251e90b4966889b7df94fdc621e": "55c3c014f2bd12d6bd62349658f24566" }
+  },
+  {
+    name: "THRILL",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/cg_thrill_sd/default/index.mpd",
+    logo: "https://i.imgur.com/mNmRiMA.png",
+    category: "Movie Channels",
+    clearKey: { "928114ffb2394d14b5585258f70ed183": "a82edc340bc73447bac16cdfed0a4c62" }
+  },
+  {
+    name: "TVN Movies",
+    type: "dash",
+    url: "https://linearjitp-playback.astro.com.my/dash-wv/linear/2406/default_ott.mpd",
+    logo: "https://i.imgur.com/oLzTyUX.png",
+    category: "Movie Channels",
+    clearKey: { "8e269c8aa32ad77eb83068312343d610": "d12ccebafbba2a535d88a3087f884252" }
+  },
+  {
+    name: "Animax",
+    type: "dash",
+    url: "https://qp-pldt-live-bpk-01-prod.akamaized.net/bpk-tv/cg_animax_sd_new/default/index.mpd",
+    logo: "https://i.imgur.com/QxTehhs.png",
+    category: "Anime/Cartoons",
+    clearKey: { "92032b0e41a543fb9830751273b8debd": "03f8b65e2af785b10d6634735dbe6c11" }
+  },
+  {
+    name: "Anime All Day",
+    type: "hls",
+    url: "https://jmp2.uk/stvp-USAJ3504502A",
+    logo: "https://images.pluto.tv/channels/5812b7d3249444e05d09cc49/colorLogoPNG.png",
+    category: "Anime/Cartoons"
+  },
+  {
+    name: "AnimeX",
+    type: "hls",
+    url: "https://live20.bozztv.com/giatv/giatv-animex/animex/playlist.m3u8",
+    logo: "https://i.imgur.com/0FLu8iV.png",
+    category: "Anime/Cartoons"
+  },
+  {
+    name: "Anime X HIDIVE",
+    type: "hls",
+    url: "https://amc-anime-x-hidive-1-us.tablo.wurl.tv/playlist.m3u8",
+    logo: "https://i.imgur.com/E1LIeR2.png",
+    category: "Anime/Cartoons"
+  },
+  {
+    name: "Aniplus",
+    type: "hls",
+    url: "https://amg18481-amg18481c1-amgplt0352.playout.now3.amagi.tv/playlist/amg18481-amg18481c1-amgplt0352/playlist.m3u8",
+    logo: "https://static.wikia.nocookie.net/animax/images/b/b8/Aniplus_Asia_Logo.png",
+    category: "Anime/Cartoons"
+  },
+  {
+    name: "Boomerang",
+    type: "hls",
+    url: "https://fl7.moveonjoy.com/BOOMERANG/index.m3u8",
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s21883_dark_360w_270h.png",
+    category: "Anime/Cartoons"
+  }
+);
 ];
