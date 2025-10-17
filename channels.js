@@ -19,8 +19,8 @@ const combinedChannels = [
   { name: "Anime All Day", type: "hls",
     url: "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/5812b7d3249444e05d09cc49/master.m3u8" },
 
-  { name: "KBS World (HLS)", type: "hls",
-    url: "https://kbsworld-ott.akamaized.net/hls/live/2002341/kbsworld/master.m3u8" },
+  { name: "Cinemo", type: "hls",
+    url: "https://live-faws.akamaized.net/out/v1/93b9db7b231d45f28f64f29b86dc6c65/index.mpd" },
 
   { name: "ABS-CBN Live (YouTube)", type: "youtube",
     url: "https://www.youtube.com/embed/x_qgWdUGb0s" },
