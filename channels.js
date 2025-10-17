@@ -110,4 +110,15 @@ const combinedChannels = [
       "d273c085f2ab4a248e7bfc375229007d": "7932354c3a84f7fc1b80efa6bcea0615"
     }
   },
+
+  {
+  name: "ALIW CHANNEL",
+  url: "http://161.49.17.2:6610/001/2/ch00000090990000001109/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com",
+  logo: "https://i.imgur.com/lrd5Z0V.jpeg",
+  category: "Local Channels 🇵🇭",
+  type: "dash",
+  drm: {
+    widevine: "http://143.44.136.74:9443/widevine/?deviceId=02:00:00:00:00:00"
+  }
+  
 ];
