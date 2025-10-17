@@ -103,16 +103,5 @@ const combinedChannels = [
     type: "hls",
     url: "https://myxnola-abscbn-ono.amagi.tv/index.m3u8"
   },
-
-  /* ---------- WIDEVINE (DASH) ---------- */
-  {
-    name: "ALIW CHANNEL",
-    type: "dash",
-    url: "http://161.49.17.2:6610/001/2/ch00000090990000001109/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com",
-    logo: "https://i.imgur.com/lrd5Z0V.jpeg",
-    category: "Local Channels 🇵🇭",
-    drm: {
-      widevine: "http://143.44.136.74:9443/widevine/?deviceId=02:00:00:00:00:00"
-    }
   }
 ];
