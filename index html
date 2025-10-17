@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB IPTV</title>
+
+  <!-- HLS.js + Shaka Player -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.0/hls.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
+
+  <!-- External Channel List -->
+  <script src="channels.js"></script>
+
+  <link rel="icon" href="logo.png" type="image/png">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #262323;
+      color: #fff;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      width: 250px;
+      background-color: #393535;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-right: 2px solid #444;
+    }
+
+    #sidebar h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .channel {
+      padding: 10px;
+      background: #5d5a5a;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.3s;
+      margin-top: 3px;
+    }
+
+    .channel:hover { background: #000; }
+
+    /* Main */
+    .main-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    #videoContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    video, iframe {
+      width: 80%;
+      max-width: 800px;
+      border: 2px solid white;
+      display: none;
+      background-color: #000;
+    }
+
+    #shakaContainer {
+      width: 100%;
+      display: none;
+      justify-content: center;
+    }
+
+    #shakaPlayer {
+      width: 80%;
+      max-width: 900px;
+      border: 2px solid white;
+      background-color: #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="sidebar">
+    <img src="mwlogo.png" alt="MAVIEW Logo"
+         style="height:40px;width:40px;margin-left:70px;">
+    <h2>Channels</h2>
+    <div id="combinedChannels"><!-- populated dynamically --></div>
+  </div>
+
+  <div class="main-content">
+    <div id="videoContainer">
+      <iframe id="videoFrame" width="560" height="315"
+              frameborder="0" allowfullscreen></iframe>
+      <video id="videoPlayer" controls></video>
+    </div>
+
+    <div id="shakaContainer">
+      <video id="shakaPlayer" controls autoplay playsinline></video>
+    </div>
+  </div>
+
+  <script>
+    let video = document.getElementById("videoPlayer");
+    let iframe = document.getElementById("videoFrame");
+    let hls = null;
+
+    const shakaVideo = document.getElementById('shakaPlayer');
+    const shakaPlayer = new shaka.Player(shakaVideo);
+
+    function loadChannels() {
+      const container = document.getElementById('combinedChannels');
+      container.innerHTML = '';
+      combinedChannels.forEach(channel => {
+        const btn = document.createElement('div');
+        btn.className = 'channel';
+        btn.textContent = channel.name;
+        btn.addEventListener('click', () => playChannel(channel));
+        container.appendChild(btn);
+      });
+    }
+
+    function stopAllPlayers() {
+      if (hls) { hls.destroy(); hls = null; }
+      video.pause(); video.removeAttribute('src'); video.load();
+      iframe.src = '';
+      shakaPlayer.unload();
+    }
+
+    function playChannel(channel) {
+      stopAllPlayers();
+
+      if (channel.type === 'youtube') {
+        iframe.style.display = 'block';
+        video.style.display = 'none';
+        document.getElementById('shakaContainer').style.display = 'none';
+        iframe.src = channel.url.replace('autoplay=1', 'autoplay=0');
+      }
+      else if (channel.type === 'hls') {
+        iframe.style.display = 'none';
+        video.style.display = 'block';
+        document.getElementById('shakaContainer').style.display = 'none';
+
+        if (Hls.isSupported()) {
+          hls = new Hls();
+          hls.loadSource(channel.url);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = channel.url;
+          video.play();
+        }
+      }
+      else if (channel.type === 'dash') {
+        iframe.style.display = 'none';
+        video.style.display = 'none';
+        document.getElementById('shakaContainer').style.display = 'flex';
+        try {
+          if (channel.clearKey) {
+            shakaPlayer.configure({ drm: { clearKeys: channel.clearKey } });
+          }
+          shakaPlayer.configure({
+            streaming: { bufferingGoal: 60, rebufferingGoal: 2, bufferBehind: 30 },
+            abr: { enabled: true, defaultBandwidthEstimate: 500000 }
+          });
+          shakaPlayer.load(channel.url).then(() => shakaVideo.play());
+          shakaVideo.style.display = 'block';
+        } catch (err) {
+          console.error('DASH error:', err);
+          alert('Error loading video: ' + err.message);
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await shaka.polyfill.installAll();
+      if (!shaka.Player.isBrowserSupported()) {
+        alert('Your browser does not support required playback features');
+      } else loadChannels();
+    });
+  </script>
+</body>
+</html>
