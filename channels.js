@@ -119,5 +119,5 @@ const combinedChannels = [
   type: "dash",
   drm: {
     widevine: "http://143.44.136.74:9443/widevine/?deviceId=02:00:00:00:00:00"
-  }
+  },
 ];
