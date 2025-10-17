@@ -28,6 +28,17 @@ const combinedChannels = [
   },
 
   {
+    name: "ALIW CHANNEL",
+    url: "http://161.49.17.2:6610/001/2/ch00000090990000001109/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com",
+    logo: "https://i.imgur.com/lrd5Z0V.jpeg",
+    category: "Local Channels 🇵🇭",
+    type: "dash",
+    drm: {
+      widevine: "http://143.44.136.74:9443/widevine/?deviceId=02:00:00:00:00:00"
+    }
+  }
+
+  {
     name: "ANC",
     type: "dash",
     url: "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-anc-global-dash-abscbnono/index.mpd",
