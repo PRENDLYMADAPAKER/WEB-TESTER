@@ -674,5 +674,4 @@ const combinedChannels = [
     logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s21883_dark_360w_270h.png",
     category: "Anime/Cartoons"
   }
-);
 ];
