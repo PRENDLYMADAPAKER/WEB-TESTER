@@ -345,7 +345,6 @@ const combinedChannels = [
     }
   },
   {
-  {
     name: "HBO Hits",
     type: "dash",
     url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_hbohits/default1/index.mpd",
