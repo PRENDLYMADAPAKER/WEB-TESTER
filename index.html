@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="Jinwoo.png">
+  <title>Shakzz TV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- JW Player and Shaka -->
+  <script src="jwplayer.js"></script>
+  <script src="provider.shaka.js"></script>
+  <script>jwplayer.key = "ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc=";</script>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: #111;
+      border-bottom: 1px solid #222;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .logo span {
+      font-size: 18px;
+      font-weight: bold;
+      color: #00e0ff;
+      letter-spacing: 1px;
+    }
+
+    #main {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    #playerContainer {
+      flex: 2;
+      min-width: 300px;
+      background: #000;
+      border-radius: 8px;
+    }
+
+    #video {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      border-radius: 8px;
+    }
+
+    #sidebar {
+      flex: 1;
+      min-width: 280px;
+      background: #111;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    input#search {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      background: #1b1b1b;
+      color: #fff;
+    }
+
+    button {
+      background: #00c3ff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      padding: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00a8d9;
+    }
+
+    #channelCountText {
+      font-size: 13px;
+      color: #ccc;
+      text-align: center;
+      margin: 6px 0;
+    }
+
+    .channel {
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 6px;
+      background: #1a1a1a;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .channel:hover {
+      background: #272727;
+    }
+
+    .channel div:first-child {
+      font-weight: bold;
+      color: #00d9ff;
+    }
+
+    .channel div:last-child {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    #nowPlaying {
+      background: #0c0c0c;
+      padding: 8px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 14px;
+      color: #00e0ff;
+    }
+
+    @media (max-width: 768px) {
+      #main {
+        flex-direction: column;
+      }
+
+      #sidebar {
+        order: 2;
+      }
+
+      #playerContainer {
+        order: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo" onclick="location.reload()">
+      <img src="Jinwoo.png" alt="Logo">
+      <span>Shakzz TV</span>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="playerContainer">
+      <div id="video"></div>
+      <div id="nowPlaying">Now Playing: <span id="nowPlayingChannel">--</span></div>
+    </div>
+
+    <div id="sidebar">
+      <input type="text" id="search" placeholder="Search channel..." />
+      <div style="display:flex; gap:5px;">
+        <button id="refreshBtn">🔄 Refresh Playlist</button>
+        <button id="autoRefreshToggle">Auto Refresh: OFF</button>
+      </div>
+      <div id="channelCountText">0 channels found</div>
+      <div id="channelList"></div>
+    </div>
+  </main>
+
+  <div style="padding: 10px; text-align: center; font-size: 12px; color: #777;">
+    <p>📺 Shakzz TV — Works on PC and Android Browsers. Powered by JW Player + Shaka.</p>
+  </div>
+
+  <!-- Logging area (optional) -->
+  <pre id="log" style="height:120px; overflow:auto; background:#0a0a0a; color:#ccc; padding:5px; font-size:11px;"></pre>
+
+  <!-- Load main IPTV logic -->
+  <script src="cutie-patched.js"></script>
+</body>
+</html>
