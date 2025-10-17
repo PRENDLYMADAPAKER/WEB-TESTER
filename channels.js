@@ -378,14 +378,14 @@ const combinedChannels = [
   {
     name: "HBO2",
     type: "hls",
-    url: "http://jabawalkies.club:8080/Yge18mSBSG/Tygp63MXun/18267",
+    url: "https://fl7.moveonjoy.com/HBO_2/index.m3u8",
     logo: "https://m.media-amazon.com/images/G/01/digital/video/Linear_Clean_Slate/HBO2._SL170_FMpng_.png",
     category: "Movie Channels"
   },
   {
     name: "HBO Comedy",
     type: "hls",
-    url: "http://jabawalkies.club:8080/Yge18mSBSG/Tygp63MXun/1609",
+    url: "https://fl7.moveonjoy.com/HBO_COMEDY/index.m3u8",
     logo: "https://m.media-amazon.com/images/G/01/digital/video/Linear_Clean_Slate/HBO_Comedy._SL170_FMpng_.png",
     category: "Movie Channels"
   },
@@ -422,43 +422,15 @@ const combinedChannels = [
   {
     name: "HBO Zone",
     type: "hls",
-    url: "http://jabawalkies.club:8080/Yge18mSBSG/Tygp63MXun/1614",
+    url: "https://fl7.moveonjoy.com/HBO_ZONE/index.m3u8",
     logo: "https://m.media-amazon.com/images/G/01/digital/video/Linear_Clean_Slate/HBO_Zone_East._SL170_FMpng_.png",
-    category: "Movie Channels"
-  },
-  {
-    name: "MGM+",
-    type: "hls",
-    url: "https://fl3.moveonjoy.com/EPIX/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mgm-plus-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "MGM+ Drive-In",
-    type: "hls",
-    url: "http://fl1.moveonjoy.com/EPIX_DRIVE_IN/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mgm-plus-drive-in-us.png?raw=true",
-    category: "Movie Channels"
-  },
-  {
-    name: "MGM+ Hits",
-    type: "hls",
-    url: "http://fl1.moveonjoy.com/EPIX_HITS/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mgm-plus-hits-us.png?raw=true",
     category: "Movie Channels"
   },
   {
     name: "MovieSphere by Lionsgate",
     type: "hls",
-    url: "https://jmp2.uk/plu-645e7828e1979c00087b75b4.m3u8",
+    url: "https://live-manifest.production-public.tubi.io/live/050aaad2-b60d-4525-9e2e-2465b85cfa43/playlist.m3u8",
     logo: "https://images.pluto.tv/channels/645e7828e1979c00087b75b4/colorLogoPNG.png",
-    category: "Movie Channels"
-  },
-  {
-    name: "Movie Time",
-    type: "hls",
-    url: "http://38.143.48.212:9981/stream/channelid/1403847081?profile=pass",
-    logo: "https://media.starlite.best/movietime.ca.png",
     category: "Movie Channels"
   },
   {
@@ -470,13 +442,6 @@ const combinedChannels = [
     clearKey: {
       "40f019b86241d23ef075633fd7f1e927": "058dec845bd340178a388edd104a015e"
     }
-  },
-  {
-    name: "OUTER MAX",
-    type: "hls",
-    url: "https://fl3.moveonjoy.com/OUTER_MAX/index.m3u8",
-    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cinemax-outermax-us.png?raw=true",
-    category: "Movie Channels"
   },
   {
     name: "RageTV",
