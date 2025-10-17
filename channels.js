@@ -54,12 +54,9 @@ const combinedChannels = [
   },
 
   {
-    name: "TFC (DASH)",
+    name: "Cinemo",
     type: "dash",
-    url: "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-tfcasia-dash-abscbnono/7045bc3c-9492-42d4-974e-a3b217776e57/index.mpd",
-    clearKey: {
-      "9568cc84e1d944f38eac304517eab6fd": "f12142af8f39b3bab79d3679d3665ebe"
-    }
+    url: "https://live-faws.akamaized.net/out/v1/93b9db7b231d45f28f64f29b86dc6c65/index.mpd",
   },
 
   {
