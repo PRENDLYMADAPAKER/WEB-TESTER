@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>WEB IPTV — Cutie Deluxe</title>
+
+<!-- Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.0/hls.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
+
+<!-- Keep your channels file unchanged -->
+<script src="channels.js"></script>
+
+<link rel="icon" href="logo.png" type="image/png" />
+
+<style>
+  /* ---------- THEME VARIABLES ---------- */
+  :root{
+    --bg0:#060607;
+    --bg1:#0f0f10;
+    --panel: rgba(255,255,255,0.03);
+    --muted: #9aa0a6;
+    --neon: #ff3ea6; /* default neon */
+    --accent: var(--neon);
+    --glass: rgba(255,255,255,0.02);
+    --card: #101113;
+    --shadow: rgba(0,0,0,0.6);
+  }
+  /* Alternative themes (applied via body[data-theme="..."]) */
+  body[data-theme="blue"] { --neon: #3ea6ff; --accent: #3ea6ff; }
+  body[data-theme="dark"] { --neon: #9a9a9a; --accent: #9a9a9a; }
+  body[data-theme="retro"] { --neon: #ffb84d; --accent: #ffb84d; }
+
+  /* ---------- BASE ---------- */
+  *{box-sizing:border-box;font-family:Inter, system-ui, Arial, sans-serif}
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg0),var(--bg1));color:#fff; -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .app {
+    display:grid;
+    grid-template-columns:260px 1fr;
+    grid-template-rows:auto 1fr;
+    height:100vh;
+    gap:14px;
+    padding:14px;
+  }
+
+  /* ---------- TOP NAV ---------- */
+  .topbar{
+    grid-column:1 / -1;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    position:sticky;
+    top:0;
+    z-index:80;
+    padding:8px 14px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+  }
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo img{width:42px;height:42px;border-radius:50%;object-fit:cover}
+  .title{font-weight:700;font-size:16px}
+  .subtitle{font-size:12px;color:var(--muted)}
+
+  /* search & filter */
+  .controls{display:flex;gap:8px;align-items:center}
+  .search{
+    display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:var(--glass);min-width:260px;max-width:480px;
+  }
+  .search input{background:transparent;border:0;outline:none;color:#fff;width:100%;font-size:14px}
+  .select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 8px;border-radius:8px;color:var(--muted)}
+
+  /* theme switcher */
+  .themeBtn{padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);cursor:pointer;background:transparent;color:var(--muted)}
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:12px;overflow:auto;border:1px solid rgba(255,255,255,0.03)
+  }
+  .sectionTitle{font-size:13px;color:var(--muted);margin-bottom:6px}
+  .channelList{display:flex;flex-direction:column;gap:8px}
+  .channelCard{
+    display:flex;align-items:center;gap:8px;padding:8px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.02);cursor:pointer;
+    transition:transform .12s, box-shadow .12s, background .12s;
+  }
+  .channelCard:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.6);background:linear-gradient(90deg, rgba(255,255,255,0.01), transparent)}
+  .chThumb{width:48px;height:36px;border-radius:6px;background:#0b0b0c;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;flex-shrink:0}
+  .chInfo{flex:1}
+  .chName{font-weight:600;font-size:14px}
+  .chType{font-size:12px;color:var(--muted);margin-top:4px}
+  .favBtn{width:30px;height:30px;border-radius:8px;border:0;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+  /* section collapsed placeholder */
+  .muted{color:var(--muted)}
+
+  /* ---------- MAIN AREA ---------- */
+  .main{
+    display:flex;flex-direction:column;gap:12px;overflow:auto;padding-bottom:16px;
+  }
+
+  /* player card is fixed in layout area — we make it steady */
+  .playerWrap{
+    display:flex;flex-direction:column;gap:10px;align-items:center;position:relative;
+  }
+  .playerCard{
+    width:70%;
+    max-width:1200px;
+    min-width:360px;
+    aspect-ratio:16/9;
+    background:#000;
+    border-radius:12px;
+    overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,0.04);
+    box-shadow:0 18px 50px rgba(0,0,0,0.7);
+    transition:all .28s ease;
+    position:relative; /* for overlays */
+  }
+  /* balanced responsive sizing */
+  @media (max-width:1100px){
+    .playerCard{width:90%}
+  }
+  @media (max-width:600px){
+    .playerCard{width:95%;min-width:280px}
+  }
+
+  /* video + iframe styling */
+  .playerCard video, .playerCard iframe{width:100%;height:100%;display:block;border:0;background:#000;object-fit:cover}
+
+  /* custom minimal controls (we hide native timeline) */
+  .controlsBar{
+    position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));backdrop-filter: blur(6px);
+  }
+  .miniControls{display:flex;gap:8px;align-items:center}
+  .ctlBtn{background:transparent;border:0;color:#fff;padding:8px;border-radius:8px;cursor:pointer}
+  .volume {width:110px;display:flex;gap:6px;align-items:center}
+  .volume input[type="range"]{width:100%;appearance:none;background:transparent}
+
+  /* hide native controls timeline and time display for browsers that allow styling - fallback: we removed native controls and provide custom ones */
+  video::-webkit-media-controls-timeline, video::-webkit-media-controls-current-time-display, video::-webkit-media-controls-time-remaining-display { display:none !important; }
+  video::-webkit-media-controls { opacity: 0 !important; }
+  /* we use controls=false on video element and our custom controls instead */
+
+  /* now playing bar below player */
+  .nowPlaying{
+    width:70%;max-width:1200px;display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02)
+  }
+  .nowThumb{width:60px;height:40px;border-radius:6px;background:#111;display:flex;align-items:center;justify-content:center}
+  .nowTitle{font-weight:700}
+  .nowMeta{font-size:13px;color:var(--muted)}
+
+  /* ---------- CATEGORY BAR (swipeable) ---------- */
+  .catBar{display:flex;gap:8px;align-items:center;overflow:auto;padding:8px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
+  .catBtn{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--muted)}
+  .catBtn.active{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border-color:var(--accent);color:var(--accent)}
+
+  /* ---------- GRID / LIST toggle and layout ---------- */
+  .controlsRow{display:flex;align-items:center;gap:8px;justify-content:space-between;width:100%}
+  .viewToggle{display:flex;gap:6px;align-items:center}
+  .gridWrap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media (max-width:1000px){ .gridWrap{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:600px){ .gridWrap{grid-template-columns:repeat(1,1fr)} }
+
+  .listWrap{display:flex;flex-direction:column;gap:8px}
+
+  .channelBig{
+    padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);display:flex;gap:12px;align-items:center;cursor:pointer;border:1px solid rgba(255,255,255,0.02)
+  }
+
+  /* ---------- INFO PANEL ---------- */
+  .infoPanel{
+    position:fixed;right:18px;bottom:18px;width:320px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 18px 50px rgba(0,0,0,0.6);z-index:120;transform:translateY(20px);opacity:0;transition:all .28s;
+  }
+  .infoPanel.show{transform:translateY(0);opacity:1}
+
+  /* ---------- TOAST ---------- */
+  .toastWrap{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;z-index:160;display:flex;flex-direction:column;gap:8px;align-items:center}
+  .toast{background:linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.45));padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(0,0,0,0.6);color:#fff}
+
+  /* ---------- MINI PLAYER (floating when browsing) ---------- */
+  .miniMode .playerCard{width:320px;height:180px;aspect-ratio:auto;position:fixed;right:18px;bottom:18px;z-index:140}
+  .miniMode .nowPlaying{display:none}
+  .miniMode .playerCard video, .miniMode .playerCard iframe{height:100%;width:100%}
+
+  /* ---------- small helpers ---------- */
+  .hidden{display:none}
+  .btn{padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted);cursor:pointer}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="topbar">
+  <div class="logo">
+    <img src="mwlogo.png" alt="logo" onerror="this.style.display='none'"/>
+    <div>
+      <div class="title">WEB IPTV — Cutie Deluxe</div>
+      <div class="subtitle">HLS • DASH • YouTube</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.7"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.4"/></svg>
+      <input id="searchInput" placeholder="Search channels..." />
+    </div>
+
+    <select id="typeFilter" class="select">
+      <option value="all">All</option>
+      <option value="hls">HLS</option>
+      <option value="dash">DASH</option>
+      <option value="youtube">YouTube</option>
+    </select>
+
+    <div style="display:flex;gap:8px;align-items:center">
+      <button id="themeBtn" class="themeBtn">Theme</button>
+      <button id="viewToggleBtn" class="btn" title="Toggle Grid/List">Grid</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP GRID -->
+<div class="app" id="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div>
+      <div class="sectionTitle">Favorites</div>
+      <div id="favoritesList" class="channelList"></div>
+    </div>
+
+    <div>
+      <div class="sectionTitle" style="margin-top:6px">Categories</div>
+      <div id="catBar" class="catBar"></div>
+    </div>
+
+    <div style="margin-top:8px">
+      <div class="sectionTitle">Channels</div>
+      <div id="channelsList" class="channelList"></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="playerWrap">
+      <div class="playerCard" id="playerCard">
+        <!-- video/iframe container -->
+        <video id="videoPlayer" playsinline></video>
+        <iframe id="videoFrame" frameborder="0" allowfullscreen></iframe>
+        <!-- Shaka container -->
+        <div id="shakaContainer" style="display:none;width:100%;height:100%"><video id="shakaPlayer" playsinline></video></div>
+
+        <!-- custom controls (no timeline/time display) -->
+        <div class="controlsBar" id="controlsBar">
+          <div class="miniControls">
+            <button id="playBtn" class="ctlBtn" title="Play/Pause">►</button>
+            <div class="volume">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M11 5v14l-6-6H3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <input id="volumeRange" type="range" min="0" max="1" step="0.05" value="1">
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:center">
+            <div id="loadingIndicator" style="display:none" class="muted"><span style="display:inline-block;width:16px;height:16px;border-radius:50%;border:3px solid rgba(255,255,255,0.08);border-top-color:var(--accent);animation:spin 1s linear infinite"></span></div>
+            <button id="fsBtn" class="ctlBtn" title="Fullscreen">⤢</button>
+            <button id="infoBtn" class="ctlBtn" title="Channel Info">i</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="nowPlaying" id="nowPlaying" style="display:none">
+        <div class="nowThumb" id="nowThumb">TV</div>
+        <div style="flex:1">
+          <div class="nowTitle" id="nowTitle">Not playing</div>
+          <div class="nowMeta" id="nowMeta">—</div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button id="miniToggle" class="btn">Mini</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:100%" class="controlsRow">
+      <div id="listControls" style="display:flex;gap:8px;align-items:center">
+        <div class="muted">Browse channels — click a card to play</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="muted">View</div>
+        <button id="gridBtn" class="btn">Grid</button>
+        <button id="listBtn" class="btn">List</button>
+      </div>
+    </div>
+
+    <!-- category + channels area -->
+    <div id="channelsArea" style="width:100%">
+      <div id="catRow" style="margin-bottom:8px"></div>
+
+      <div id="gridContainer" class="gridWrap"></div>
+      <div id="listContainer" class="listWrap hidden"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Info Panel -->
+<div id="infoPanel" class="infoPanel hidden">
+  <div style="display:flex;gap:10px;align-items:center">
+    <div style="width:72px;height:48px;border-radius:6px;background:#111;display:flex;align-items:center;justify-content:center" id="infoThumb">TV</div>
+    <div>
+      <div id="infoName" style="font-weight:700"></div>
+      <div id="infoType" class="muted"></div>
+    </div>
+  </div>
+  <div id="infoDesc" style="margin-top:10px;color:var(--muted);font-size:13px">No description</div>
+  <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+    <button id="infoFav" class="btn">★ Favorite</button>
+    <button id="infoPlay" class="btn">Play</button>
+    <button id="infoClose" class="btn">Close</button>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div id="toastWrap" class="toastWrap"></div>
+
+<!-- small spinner keyframes duplicate -->
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+
+<script>
+/* ========== State & Player Setup ========== */
+const video = document.getElementById('videoPlayer');
+const iframe = document.getElementById('videoFrame');
+let hls = null;
+
+const shakaVideo = document.getElementById('shakaPlayer');
+const shakaContainer = document.getElementById('shakaContainer');
+let shakaPlayer = new shaka.Player(shakaVideo);
+
+/* UI elements */
+const channelsListEl = document.getElementById('channelsList');
+const favoritesListEl = document.getElementById('favoritesList');
+const gridContainer = document.getElementById('gridContainer');
+const listContainer = document.getElementById('listContainer');
+const catBar = document.getElementById('catBar');
+
+const searchInput = document.getElementById('searchInput');
+const typeFilter = document.getElementById('typeFilter');
+
+const playBtn = document.getElementById('playBtn');
+const volumeRange = document.getElementById('volumeRange');
+const fsBtn = document.getElementById('fsBtn');
+const infoBtn = document.getElementById('infoBtn');
+const loadingIndicator = document.getElementById('loadingIndicator');
+
+const nowPlayingEl = document.getElementById('nowPlaying');
+const nowTitle = document.getElementById('nowTitle');
+const nowMeta = document.getElementById('nowMeta');
+const nowThumb = document.getElementById('nowThumb');
+const miniToggle = document.getElementById('miniToggle');
+
+const infoPanel = document.getElementById('infoPanel');
+const infoName = document.getElementById('infoName');
+const infoType = document.getElementById('infoType');
+const infoDesc = document.getElementById('infoDesc');
+const infoFav = document.getElementById('infoFav');
+const infoPlay = document.getElementById('infoPlay');
+const infoClose = document.getElementById('infoClose');
+
+const toastWrap = document.getElementById('toastWrap');
+const playerCard = document.getElementById('playerCard');
+const appEl = document.getElementById('app');
+
+let favorites = JSON.parse(localStorage.getItem('iptv_favs') || '[]');
+let lastPlayedName = localStorage.getItem('iptv_last') || null;
+let currentChannel = null;
+let reconnecting = false;
+let reconnectAttempts = 0;
+let freezeWatcher = null;
+let isPlaying = false;
+
+/* shaka polyfill */
+(async ()=>{ await shaka.polyfill.installAll(); if (!shaka.Player.isBrowserSupported()) console.warn('Shaka not fully supported'); })();
+
+/* ---------- Utility: Toast ---------- */
+function toast(msg, ttl=3000){
+  const t = document.createElement('div'); t.className='toast'; t.textContent = msg;
+  toastWrap.appendChild(t);
+  setTimeout(()=>{ t.style.opacity = 0; t.style.transform = 'translateY(6px)'; }, ttl-300);
+  setTimeout(()=> t.remove(), ttl);
+}
+
+/* ---------- Favorites helpers ---------- */
+function isFav(name){ return favorites.includes(name); }
+function toggleFavByName(name){
+  if(isFav(name)) favorites = favorites.filter(n=>n!==name);
+  else favorites.push(name);
+  localStorage.setItem('iptv_favs', JSON.stringify(favorites));
+}
+
+/* ---------- Render channel card helpers ---------- */
+function cardElementFor(channel){
+  const el = document.createElement('div'); el.className = 'channelCard';
+  const thumb = document.createElement('div'); thumb.className='chThumb';
+  thumb.textContent = (channel.logo ? '' : channel.name.split(' ')[0].slice(0,6));
+  const info = document.createElement('div'); info.className='chInfo';
+  const name = document.createElement('div'); name.className='chName'; name.textContent = channel.name;
+  const type = document.createElement('div'); type.className='chType'; type.textContent = channel.type.toUpperCase();
+  info.appendChild(name); info.appendChild(type);
+
+  const fav = document.createElement('button'); fav.className='favBtn'; fav.innerHTML = isFav(channel.name) ? starSVG(true) : starSVG(false);
+  fav.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    toggleFavByName(channel.name);
+    renderAll();
+    toast(isFav(channel.name) ? 'Added to favorites' : 'Removed from favorites');
+  });
+
+  el.appendChild(thumb); el.appendChild(info); el.appendChild(fav);
+  el.addEventListener('click', ()=> playChannel(channel));
+  el.addEventListener('contextmenu', (e)=>{ e.preventDefault(); openInfo(channel); });
+  return el;
+}
+
+/* SVG star helper */
+function starSVG(active){
+  if(active) return `<svg width="18" height="18" viewBox="0 0 24 24" fill="#ffcc00" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.3l6.18 3.73-1.64-7.03L21 9.24l-7.19-.61L12 2 10.19 8.63 3 9.24l4.46 4.76L5.82 21z"/></svg>`;
+  return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.3l6.18 3.73-1.64-7.03L21 9.24l-7.19-.61L12 2 10.19 8.63 3 9.24l4.46 4.76L5.82 21z"/></svg>`;
+}
+
+/* ---------- UI Renderers ---------- */
+function renderCategories(){
+  // build simple categories from channel types and first words
+  const cats = new Set(['All']);
+  combinedChannels.forEach(ch=>{
+    if(ch.type) cats.add(ch.type.toUpperCase());
+    const first = (ch.name||'').split(' ')[0];
+    if(first && first.length<=10) cats.add(first);
+  });
+    // clear
+  catBar.innerHTML = '';
+  Array.from(cats).slice(0,18).forEach((c,i)=>{
+    const b = document.createElement('button'); b.className='catBtn'; b.textContent = c;
+    if(i===0) b.classList.add('active');
+    b.addEventListener('click', ()=>{ document.querySelectorAll('.catBtn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); applyFilters(); });
+    catBar.appendChild(b);
+  });
+}
+
+function renderAll(){
+  // favorites
+  favoritesListEl.innerHTML = '';
+  const favCh = combinedChannels.filter(c=>isFav(c.name));
+  if(favCh.length===0){
+    const p = document.createElement('div'); p.className='muted'; p.textContent='No favorites yet'; favoritesListEl.appendChild(p);
+  } else favCh.forEach(c=>favoritesListEl.appendChild(cardElementFor(c)));
+
+  // channels grid and list
+  const q = (searchInput.value || '').toLowerCase();
+  const type = typeFilter.value;
+
+  const filtered = combinedChannels.filter(ch=>{
+    if(type !== 'all' && ch.type !== type) return false;
+    if(q && !ch.name.toLowerCase().includes(q)) return false;
+    // category filter
+    const activeCatBtn = document.querySelector('.catBtn.active');
+    if(activeCatBtn && activeCatBtn.textContent !== 'All'){
+      const cat = activeCatBtn.textContent.toLowerCase();
+      if(!(ch.type.toLowerCase() === cat || ch.name.toLowerCase().startsWith(cat))) return false;
+    }
+    return true;
+  });
+
+  gridContainer.innerHTML = '';
+  listContainer.innerHTML = '';
+  filtered.forEach(ch=>{
+    // grid item
+    const g = document.createElement('div'); g.className='channelBig';
+    g.style.display='flex'; g.style.alignItems='center';
+    g.innerHTML = `<div style="width:120px;height:72px;border-radius:8px;background:#0b0b0b;display:flex;align-items:center;justify-content:center;color:var(--muted)">${ch.name.split(' ')[0].slice(0,10)}</div>
+                   <div style="flex:1"><div style="font-weight:700">${ch.name}</div><div style="font-size:13px;color:var(--muted);margin-top:6px">${ch.type.toUpperCase()}</div></div>
+                   <div style="display:flex;flex-direction:column;gap:6px">
+                     <button class="btn" style="margin-bottom:6px">Play</button>
+                     <button class="btn" title="Favorite">★</button>
+                   </div>`;
+    g.querySelector('.btn').addEventListener('click', ()=> playChannel(ch));
+    g.querySelectorAll('.btn')[1].addEventListener('click', ()=>{ toggleFavByName(ch.name); renderAll(); toast(isFav(ch.name)?'Added to favorites':'Removed from favorites'); });
+
+    gridContainer.appendChild(g);
+
+    // list item
+    listContainer.appendChild(cardElementFor(ch));
+  });
+}
+
+/* ---------- Filters ---------- */
+function applyFilters(){ renderAll(); }
+
+/* ---------- Player Controls (custom) ---------- */
+playBtn.addEventListener('click', ()=>{
+  if(currentChannel && (currentChannel.type === 'hls' || currentChannel.type === 'dash' || currentChannel.type==='clearkey')){
+    const p = (currentChannel.type==='dash' || currentChannel.type==='clearkey') ? shakaVideo : video;
+    if(p.paused) { p.play().catch(()=>{}); playBtn.textContent = '❚❚'; isPlaying = true; }
+    else { p.pause(); playBtn.textContent = '►'; isPlaying = false; }
+  } else if(currentChannel && currentChannel.type === 'youtube'){
+    // can't control iframe directly without postMessage API; toggle play icon only
+    if(playBtn.textContent === '►') { playBtn.textContent = '❚❚'; } else playBtn.textContent = '►';
+  }
+});
+
+volumeRange.addEventListener('input', ()=> {
+  const v = parseFloat(volumeRange.value);
+  try { video.volume = v; shakaVideo.volume = v; } catch(e){}
+});
+
+/* fullscreen */
+fsBtn.addEventListener('click', ()=> {
+  if(document.fullscreenElement) document.exitFullscreen();
+  else playerCard.requestFullscreen().catch(()=>{});
+});
+
+/* info panel open */
+infoBtn.addEventListener('click', ()=> {
+  if(infoPanel.classList.contains('show')) closeInfo();
+  else if(currentChannel) openInfo(currentChannel);
+});
+
+/* mini toggle */
+let forceMini = false;
+miniToggle.addEventListener('click', ()=> {
+  forceMini = !forceMini;
+  document.body.classList.toggle('miniMode', forceMini);
+});
+
+/* ---------- Info Panel ---------- */
+function openInfo(ch){
+  infoPanel.classList.add('show'); infoPanel.classList.remove('hidden');
+  infoName.textContent = ch.name; infoType.textContent = ch.type.toUpperCase(); infoDesc.textContent = ch.description || 'No description';
+  infoFav.textContent = isFav(ch.name) ? '★ Unfavorite' : '★ Favorite';
+  infoPlay.onclick = ()=> { playChannel(ch); closeInfo(); };
+  infoFav.onclick = ()=> { toggleFavByName(ch.name); infoFav.textContent = isFav(ch.name) ? '★ Unfavorite' : '★ Favorite'; renderAll(); toast(isFav(ch.name)?'Added to favorites':'Removed from favorites'); };
+  infoClose.onclick = closeInfo;
+}
+function closeInfo(){ infoPanel.classList.remove('show'); setTimeout(()=> infoPanel.classList.add('hidden'), 300); }
+
+/* ---------- Main play function (preserves logic + custom controls) ---------- */
+async function playChannel(channel){
+  reconnecting = false; reconnectAttempts = 0; stopFreezeWatcher();
+  stopAllPlayers();
+  currentChannel = channel;
+  setNowPlaying(channel);
+  showLoading();
+
+  // reset custom play icon
+  playBtn.textContent = '❚❚';
+  isPlaying = true;
+
+  // show/hide containers
+  iframe.style.display = 'none'; video.style.display = 'none'; shakaContainer.style.display = 'none';
+
+  if(channel.type === 'youtube'){
+    iframe.style.display = 'block';
+    iframe.src = channel.url.replace('autoplay=1','autoplay=0');
+    hideLoading();
+    startFreezeWatcher(channel); // limited for iframe
+    toast('Playing ' + channel.name);
+    return;
+  }
+
+  if(channel.type === 'hls'){
+    video.style.display = 'block';
+    if(Hls.isSupported()){
+      if(hls){ try{ hls.destroy(); }catch(e){} hls = null; }
+      hls = new Hls();
+      hls.loadSource(channel.url);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, ()=>{ video.play().catch(()=>{}); hideLoading(); startFreezeWatcher(channel); toast('Playing ' + channel.name); });
+      hls.on(Hls.Events.ERROR,(evt,data)=>{ console.warn('HLS error',data); if(data && data.fatal) attemptReconnect(channel); });
+    } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+      video.src = channel.url; video.play().then(()=>{ hideLoading(); startFreezeWatcher(channel); toast('Playing ' + channel.name); }).catch(()=>{ hideLoading(); });
+    } else {
+      hideLoading(); alert('HLS not supported on this browser');
+    }
+    return;
+  }
+
+  if(channel.type === 'dash' || channel.type === 'clearkey'){
+    shakaContainer.style.display = 'block';
+    try {
+      if(channel.clearKey){
+        shakaPlayer.configure({ drm: { clearKeys: channel.clearKey } });
+      }
+      shakaPlayer.configure({ streaming: { bufferingGoal: 60, rebufferingGoal: 2, bufferBehind: 30 }, abr: { enabled: true } });
+      await shakaPlayer.load(channel.url);
+      shakaVideo.play().catch(()=>{});
+      hideLoading(); startFreezeWatcher(channel); toast('Playing ' + channel.name);
+      shakaPlayer.removeEventListener('error', onShakaError);
+      shakaPlayer.addEventListener('error', onShakaError);
+    } catch(err){
+      console.error('Shaka failed to load', err);
+      hideLoading();
+      attemptReconnect(channel);
+    }
+    return;
+  }
+}
+
+/* ---------- Stop players (preserve behavior) ---------- */
+function stopAllPlayers(){
+  if(hls){ try{ hls.destroy(); }catch(e){} hls = null; }
+  try{ video.pause(); video.removeAttribute('src'); video.load(); }catch(e){}
+  try{ iframe.src = ''; }catch(e){}
+  if(shakaPlayer){ shakaPlayer.unload().catch(()=>{}); }
+  hideLoading();
+  stopFreezeWatcher();
+  playBtn.textContent = '►'; isPlaying = false;
+}
+
+/* ---------- Now playing UI ---------- */
+function setNowPlaying(ch){
+  nowPlayingEl.style.display = 'flex';
+  nowTitle.textContent = ch.name;
+  nowMeta.textContent = ch.type.toUpperCase();
+  nowThumb.textContent = ch.name.split(' ')[0].slice(0,6);
+  localStorage.setItem('iptv_last', ch.name);
+}
+
+/* ---------- Loading indicator ---------- */
+function showLoading(){ loadingIndicator.style.display = 'inline-flex'; }
+function hideLoading(){ loadingIndicator.style.display = 'none'; }
+
+/* ---------- Shaka error ---------- */
+function onShakaError(event){
+  console.error('Shaka player error', event);
+  if(event && event.detail) attemptReconnect(currentChannel);
+}
+
+/* ========== Smart freeze detection & reconnect (same logic, adapted) ========== */
+function startFreezeWatcher(channel){
+  stopFreezeWatcher();
+  let lastTime = -1;
+  let stuckCount = 0;
+  const sampleInterval = 3000;
+  const allowedStuckSamples = 3;
+
+  freezeWatcher = setInterval(async ()=>{
+    if(channel.type === 'youtube'){ return; } // iframe cannot be inspected reliably
+    let curTime = null, paused = false, ready = 0;
+    if(channel.type === 'hls'){ try{ curTime = video.currentTime; paused = video.paused; ready = video.readyState; }catch(e){} }
+    else if(channel.type === 'dash' || channel.type === 'clearkey'){ try{ curTime = shakaVideo.currentTime; paused = shakaVideo.paused; ready = shakaVideo.readyState; }catch(e){} }
+
+    // if paused or not ready, reset counters
+    if(paused || ready === 0 || curTime === 0){ lastTime = curTime; stuckCount = 0; return; }
+
+    if(lastTime === curTime){ stuckCount++; } else { stuckCount = 0; lastTime = curTime; if(reconnecting){ reconnecting = false; reconnectAttempts = 0; document.body.classList.remove('reconnecting'); hideLoading(); toast('Playback resumed'); } }
+
+    if(stuckCount >= allowedStuckSamples){
+      attemptReconnect(channel);
+      stuckCount = 0;
+      lastTime = -1;
+    }
+  }, sampleInterval);
+}
+function stopFreezeWatcher(){ if(freezeWatcher){ clearInterval(freezeWatcher); freezeWatcher = null; } }
+
+/* Attempt reconnect (infinite with backoff) */
+async function attemptReconnect(channel){
+  if(!channel) return;
+  reconnecting = true; reconnectAttempts++;
+  document.body.classList.add('reconnecting'); showLoading(); toast('Connection lost — reconnecting...');
+
+  const backoff = Math.min(5000 + reconnectAttempts * 1200, 20000);
+  await new Promise(r=>setTimeout(r, backoff));
+
+  try {
+    if(channel.type === 'hls'){
+      if(hls){ try{ hls.destroy(); }catch(e){} hls = null; }
+      video.pause(); video.removeAttribute('src'); video.load();
+      hls = new Hls(); hls.loadSource(channel.url); hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, ()=>{ video.play().catch(()=>{}); });
+      await waitForPlaybackProgress(video, 10000);
+    } else if(channel.type === 'dash' || channel.type === 'clearkey'){
+      try{ await shakaPlayer.unload(); }catch(e){}
+      if(channel.clearKey) shakaPlayer.configure({ drm: { clearKeys: channel.clearKey } });
+      await shakaPlayer.load(channel.url);
+      shakaVideo.play().catch(()=>{});
+      await waitForPlaybackProgress(shakaVideo, 10000);
+    } else {
+      // youtube iframe: can't reconnect programmatically; just stop overlay
+      hideLoading(); reconnecting=false; document.body.classList.remove('reconnecting'); return;
+    }
+
+    // success
+    reconnecting = false; reconnectAttempts = 0; document.body.classList.remove('reconnecting'); hideLoading(); toast('Reconnected');
+    startFreezeWatcher(channel);
+  } catch(err){
+    console.warn('Reconnect failed:', err);
+    // try again (infinite)
+    attemptReconnect(channel);
+  }
+}
+
+function waitForPlaybackProgress(playerEl, timeout = 8000){
+  return new Promise((resolve, reject)=>{
+    const startTime = playerEl.currentTime || 0; const start = Date.now();
+    const check = setInterval(()=>{
+      if((playerEl.currentTime || 0) > startTime + 0.1){ clearInterval(check); resolve(true); }
+      else if(Date.now() - start > timeout){ clearInterval(check); reject(new Error('no-progress')); }
+    }, 700);
+  });
+}
+
+/* ========== Init & UI wiring ========== */
+function initUI(){
+  // categories
+  renderCategories();
+  // initial render
+  renderAll();
+  // search/filter events
+  searchInput.addEventListener('input', ()=> renderAll());
+  typeFilter.addEventListener('change', ()=> renderAll());
+
+  // grid/list toggle
+  const gridBtn = document.getElementById('gridBtn'), listBtn = document.getElementById('listBtn'), viewToggleBtn = document.getElementById('viewToggleBtn');
+  gridBtn.addEventListener('click', ()=> { gridContainer.classList.remove('hidden'); listContainer.classList.add('hidden'); viewToggleBtn.textContent = 'Grid'; });
+  listBtn.addEventListener('click', ()=> { gridContainer.classList.add('hidden'); listContainer.classList.remove('hidden'); viewToggleBtn.textContent = 'List'; });
+  viewToggleBtn.addEventListener('click', ()=> {
+    const isGrid = !gridContainer.classList.contains('hidden');
+    gridContainer.classList.toggle('hidden', !isGrid);
+    listContainer.classList.toggle('hidden', isGrid);
+    viewToggleBtn.textContent = isGrid ? 'Grid' : 'List';
+  });
+
+  // theme
+  const themeBtn = document.getElementById('themeBtn');
+  const saved = localStorage.getItem('iptv_theme') || 'neon';
+  applyTheme(saved);
+  themeBtn.addEventListener('click', ()=> {
+    const next = (localStorage.getItem('iptv_theme') || 'neon') === 'neon' ? 'blue' : (localStorage.getItem('iptv_theme') === 'blue' ? 'retro' : 'neon');
+    applyTheme(next);
+  });
+
+  // mini mode scroll watcher: when user scrolls in main content and not forceMini we toggle mini
+  let lastScroll = 0;
+  document.querySelector('.main').addEventListener('scroll', (e)=> {
+    if(document.body.classList.contains('miniMode')) return;
+    const y = e.target.scrollTop || 0;
+    if(y > 120) document.body.classList.add('miniMode'); else document.body.classList.remove('miniMode');
+    lastScroll = y;
+  });
+
+  // volume initial
+  volumeRange.value = 1;
+  video.volume = 1; shakaVideo.volume = 1;
+
+  // restore last played
+  if(lastPlayedName){
+    const ch = combinedChannels.find(c => c.name === lastPlayedName);
+    if(ch) setTimeout(()=> playChannel(ch), 700);
+  }
+}
+
+/* theme helper */
+function applyTheme(name){
+  if(name === 'neon'){ document.body.setAttribute('data-theme','neon'); localStorage.setItem('iptv_theme','neon'); }
+  else if(name === 'blue'){ document.body.setAttribute('data-theme','blue'); localStorage.setItem('iptv_theme','blue'); }
+  else if(name === 'retro'){ document.body.setAttribute('data-theme','retro'); localStorage.setItem('iptv_theme','retro'); }
+}
+
+/* expose debug tools */
+window.ipvtools = { playByName: (n)=> { const ch = combinedChannels.find(c=>c.name===n); if(ch) playChannel(ch); }, stop: stopAllPlayers };
+
+/* init */
+document.addEventListener('DOMContentLoaded', ()=> { initUI(); });
+
+</script>
+</body>
+</html>
