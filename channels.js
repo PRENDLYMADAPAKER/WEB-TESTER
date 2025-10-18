@@ -437,7 +437,7 @@ const combinedChannels = [
     name: "ScreamFlix",
     type: "hls",
     url: "https://jungotvstream.chanall.tv/jungotv/screamflix/playlist_720p.m3u8",
-    logo: "https://i.imgur.com/Ym32WqZ.png",
+    logo: "https://static.wikia.nocookie.net/logopedia/images/f/fb/Scream_Flix_Logo_2022.png/revision/latest/scale-to-width-down/1200?cb=20250419020619",
     category: "Movie Channels", live: true,
   },
 
