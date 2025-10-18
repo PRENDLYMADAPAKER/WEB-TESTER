@@ -7,13 +7,13 @@
 
 const combinedChannels = [
   /* ---------- HLS STREAMS ---------- */
-  { name: "Jugo Pinoy TV", type: "hls", category: "Local Channels",
+  { name: "Jugo Pinoy TV", type: "hls", category: "Local Channels", live: true,
     url: "https://jungotvstream.chanall.tv/jungotv/jungopinoytv/stream.m3u8" },
 
   { name: "Sinemanila", type: "hls", category: "Local Channels",
     url: "https://live20.bozztv.com/giatv/giatv-sinemanila/sinemanila/playlist.m3u8" },
 
-  { name: "SUPER RADYO DZBB", type: "hls", category: "Local Channels",
+  { name: "SUPER RADYO DZBB", type: "hls", category: "Local Channels", live: true,
     url: "https://stream.gmaNews.tv/ioslive/livestream/playlist.m3u8" },
 
   /* ---------- DASH STREAMS (ClearKey) ---------- */
@@ -21,7 +21,7 @@ const combinedChannels = [
     name: "A2Z",
     type: "dash",
     url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/cg_a2z/default/index.mpd",
-    category: "Local Channels",
+    category: "Local Channels", live: true,
     clearKey: {
       "f703e4c8ec9041eeb5028ab4248fa094": "c22f2162e176eee6273a5d0b68d19530"
     }
@@ -31,7 +31,7 @@ const combinedChannels = [
     name: "ANC",
     type: "dash",
     url: "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-anc-global-dash-abscbnono/index.mpd",
-    category: "Local Channels",
+    category: "Local Channels", live: true,
     clearKey: {
       "4bbdc78024a54662854b412d01fafa16": "6039ec9b213aca913821677a28bd78ae"
     }
@@ -41,7 +41,7 @@ const combinedChannels = [
     name: "BILYONARYO CHANNEL",
     type: "dash",
     url: "https://qp-pldt-live-bpk-02-prod.akamaized.net/bpk-tv/bilyonaryoch/default1/index.mpd",
-    category: "Local Channels",
+    category: "Local Channels", live: true,
     clearKey: {
       "227ffaf09bec4a889e0e0988704d52a2": "b2d0dce5c486891997c1c92ddaca2cd2"
     }
