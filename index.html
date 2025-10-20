@@ -40,7 +40,15 @@
   .btn.glow{box-shadow:var(--neon);
     background:linear-gradient(90deg,rgba(0,210,255,0.08),rgba(106,92,255,0.06));}
 
-  .content{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:18px}
+  .content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-bottom: 80px; /* <-- ensures last row fully visible */
+}
   .row{display:flex;flex-direction:column;gap:10px}
   .row-header{display:flex;align-items:center;justify-content:space-between;padding:0 6px}
   .row-title{font-size:16px;color:var(--muted)}
@@ -312,9 +320,10 @@ function renderHome(){
 }
 favoritesTab.onclick=()=>renderHome();
 
-/* ====== Right-side Channel List ====== */
+/* ====== Right-side Channel List (with auto-close) ====== */
 const videoChannelList = document.getElementById('videoChannelList');
 const channelListContainer = document.getElementById('channelListContainer');
+let autoCloseTimer = null;
 
 function populateChannelList() {
   channelListContainer.innerHTML = '';
@@ -327,18 +336,37 @@ function populateChannelList() {
   });
 }
 
-// Toggle open/close when video area tapped
-playerWrap.addEventListener('click', (e) => {
-  const clickedInsidePanel = e.target.closest('#videoChannelList');
-  if (clickedInsidePanel) return; // ignore taps inside the panel
+function startAutoCloseTimer() {
+  clearTimeout(autoCloseTimer);
+  autoCloseTimer = setTimeout(() => {
+    videoChannelList.classList.remove('active');
+  }, 3000); // 3 seconds of no activity
+}
 
-  if (videoChannelList.classList.contains('active')) {
-    videoChannelList.classList.remove('active'); // close when tapping outside
+function resetAutoCloseTimer() {
+  clearTimeout(autoCloseTimer);
+  startAutoCloseTimer();
+}
+
+// Toggle sidebar when tapping video area
+playerWrap.addEventListener('click', (e) => {
+  const insidePanel = e.target.closest('#videoChannelList');
+  if (insidePanel) return;
+  const panel = videoChannelList;
+  if (panel.classList.contains('active')) {
+    panel.classList.remove('active');
+    clearTimeout(autoCloseTimer);
   } else {
-    videoChannelList.classList.add('active');    // open on first tap
+    panel.classList.add('active');
     populateChannelList();
+    startAutoCloseTimer();
   }
 });
+
+// Detect scroll or touch inside sidebar — reset timer
+channelListContainer.addEventListener('scroll', resetAutoCloseTimer);
+channelListContainer.addEventListener('touchstart', resetAutoCloseTimer);
+channelListContainer.addEventListener('mousemove', resetAutoCloseTimer);
 
 /* ====== Init ====== */
 window.addEventListener('load',()=>{
