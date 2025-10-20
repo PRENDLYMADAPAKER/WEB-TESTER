@@ -161,15 +161,16 @@ let hls = null, shakaPlayer = null;
 function showSpinner(){ document.getElementById('loadingSpinner').style.display='flex'; }
 function hideSpinner(){ document.getElementById('loadingSpinner').style.display='none'; }
 
-function stopAllPlayers(){
-  if(hls){ try{hls.destroy();}catch(e){} hls=null; }
-  if(shakaPlayer){ try{shakaPlayer.unload();}catch(e){} shakaPlayer=null; }
-  try{ playerVideo.pause(); playerVideo.removeAttribute('src'); playerVideo.load(); }catch(e){}
-  playerIframe.src=''; playerVideo.style.display='none'; playerIframe.style.display='none'; hideSpinner();
+function stopAllPlayers() {
+  if (hls) { try { hls.destroy(); } catch(e){}; hls = null; }
+  if (shakaPlayer) { try { shakaPlayer.destroy(); } catch(e){}; shakaPlayer = null; }
+  try { playerVideo.pause(); } catch(e){}
+  playerVideo.removeAttribute('src');
+  setTimeout(() => { try{playerVideo.load();}catch(e){}; }, 100); // smoother cleanup
 }
 
 /* ====== Player Open ====== */
-async function openPlayer(ch){
+function openPlayer(ch){
   stopAllPlayers();
   overlay.classList.add('active');
   overlay.setAttribute('aria-hidden','false');
@@ -184,47 +185,49 @@ async function openPlayer(ch){
   playerVideo.style.display='none';
   playerIframe.style.display='none';
 
-  const wrap=document.getElementById('playerWrap');
-  try{
-    if(wrap.requestFullscreen) await wrap.requestFullscreen();
-    else if(wrap.webkitRequestFullscreen) await wrap.webkitRequestFullscreen();
-    if(screen.orientation && screen.orientation.lock) await screen.orientation.lock('landscape').catch(()=>{});
-  }catch{}
-
-  try{
+  try {
     if(ch.type==='youtube'){
       playerIframe.style.display='block';
       playerIframe.src = ch.url + (ch.url.includes('?')?'&':'?')+'autoplay=1';
       hideSpinner();
-    }else if(ch.type==='hls'){
+    } else if(ch.type==='hls'){
       playerVideo.style.display='block';
       if(Hls.isSupported()){
-        hls = new Hls({maxRetries:3});
+        hls = new Hls({
+          maxBufferLength: 10,
+          liveSyncDuration: 2,
+          liveMaxLatencyDuration: 6,
+          fragLoadingTimeOut: 4000
+        });
         hls.attachMedia(playerVideo);
         hls.on(Hls.Events.MANIFEST_PARSED,()=>{hideSpinner();playerVideo.play().catch(()=>{});});
+        hls.on(Hls.Events.FRAG_BUFFERED,()=>hideSpinner());
         hls.on(Hls.Events.ERROR,(evt,data)=>{if(data.fatal){hls.destroy();hideSpinner();}});
         hls.loadSource(ch.url);
-      }else{
+      } else {
         playerVideo.src = ch.url;
         playerVideo.play().catch(()=>{});
         hideSpinner();
       }
-    }else if(ch.type==='dash'){
+    } else if(ch.type==='dash'){
       playerVideo.style.display='block';
       shaka.polyfill.installAll();
       shakaPlayer = new shaka.Player(playerVideo);
       if(ch.clearKey) shakaPlayer.configure({ drm:{ clearKeys: ch.clearKey } });
       shakaPlayer.addEventListener('buffering',e=>{ e.buffering?showSpinner():hideSpinner(); });
-      await shakaPlayer.load(ch.url);
-      playerVideo.play().catch(()=>{});
-      hideSpinner();
-    }else{
+      shakaPlayer.load(ch.url).then(()=>{ playerVideo.play().catch(()=>{}); hideSpinner(); });
+    } else {
       playerVideo.style.display='block';
       playerVideo.src = ch.url;
       playerVideo.play().catch(()=>{});
       hideSpinner();
     }
-  }catch(err){ console.error(err); hideSpinner(); }
+
+    // Parallel fullscreen/orientation (no blocking)
+    const wrap = document.getElementById('playerWrap');
+    wrap.requestFullscreen?.().catch(()=>{});
+    screen.orientation?.lock?.('landscape').catch(()=>{});
+  } catch(err){ console.error(err); hideSpinner(); }
 
   miniPlayer.style.display='flex';
   miniLogo.src = ch.logo || 'logo.png';
@@ -292,11 +295,11 @@ function createRow(title,chs){
       </div>
       <img src="${c.logo||'logo.png'}">
       <div class="name">${c.name}</div>`;
-    card.addEventListener('click',e=>{
+    card.addEventListener('pointerup', e=>{
       if(e.target.closest('.fav-toggle')) return;
       openPlayer(c);
     });
-    card.querySelector('.fav-toggle').addEventListener('click',ev=>{
+    card.querySelector('.fav-toggle').addEventListener('pointerup',ev=>{
       ev.stopPropagation();
       toggleFav(c.name,ev.target);
     });
@@ -320,7 +323,7 @@ function renderHome(){
 }
 favoritesTab.onclick=()=>renderHome();
 
-/* ====== Right-side Channel List (with auto-close) ====== */
+/* ====== Right-side Channel List with Auto-close ====== */
 const videoChannelList = document.getElementById('videoChannelList');
 const channelListContainer = document.getElementById('channelListContainer');
 let autoCloseTimer = null;
@@ -331,24 +334,24 @@ function populateChannelList() {
     const item = document.createElement('div');
     item.className = 'channel-item';
     item.innerHTML = `<img src="${ch.logo || 'logo.png'}"><span>${ch.name}</span>`;
-    item.onclick = () => openPlayer(ch);
+    item.onclick = () => {
+      videoChannelList.classList.remove('active');
+      clearTimeout(autoCloseTimer);
+      openPlayer(ch);
+    };
     channelListContainer.appendChild(item);
   });
 }
-
 function startAutoCloseTimer() {
   clearTimeout(autoCloseTimer);
   autoCloseTimer = setTimeout(() => {
     videoChannelList.classList.remove('active');
-  }, 3000); // 3 seconds of no activity
+  }, 3000);
 }
-
 function resetAutoCloseTimer() {
   clearTimeout(autoCloseTimer);
   startAutoCloseTimer();
 }
-
-// Toggle sidebar when tapping video area
 playerWrap.addEventListener('click', (e) => {
   const insidePanel = e.target.closest('#videoChannelList');
   if (insidePanel) return;
@@ -362,8 +365,6 @@ playerWrap.addEventListener('click', (e) => {
     startAutoCloseTimer();
   }
 });
-
-// Detect scroll or touch inside sidebar — reset timer
 channelListContainer.addEventListener('scroll', resetAutoCloseTimer);
 channelListContainer.addEventListener('touchstart', resetAutoCloseTimer);
 channelListContainer.addEventListener('mousemove', resetAutoCloseTimer);
