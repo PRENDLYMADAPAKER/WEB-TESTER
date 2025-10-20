@@ -170,11 +170,17 @@ function stopAllPlayers() {
 }
 
 /* ====== Player Open ====== */
-function openPlayer(ch){
+function openPlayer(ch, userGesture = false){
   stopAllPlayers();
   overlay.classList.add('active');
   overlay.setAttribute('aria-hidden','false');
   showSpinner();
+
+  // keep direct gesture alive
+  if (userGesture) {
+    const tempPlay = playerVideo.play().catch(()=>{});
+    if (tempPlay) tempPlay.finally(()=>{});
+      }
 
   nowLogo.src = ch.logo || 'logo.png';
   nowTitle.textContent = ch.name || '—';
