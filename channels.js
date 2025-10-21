@@ -189,37 +189,14 @@ const combinedChannels = [
     url: "https://live-faws.akamaized.net/out/v1/93b9db7b231d45f28f64f29b86dc6c65/index.mpd",
     logo: "https://i.imgur.com/3Ckk8OH.jpeg",
     category: "Local Channels", live: true,
-  },
-  {
-    name: "Cinema One Global",
-    type: "dash",
-    url: "https://d9rpesrrg1bdi.cloudfront.net/out/v1/93b9db7b231d45f28f64f29b86dc6c65/index.mpd",
-    logo: "https://i.imgur.com/hJ6MBiA.png",
-    category: "Local Channels", live: true,
-    clearKey: {
-      "58d0e56991194043b8fb82feb4db7276": "d68f41b59649676788889e19fb10d22c"
-    }
-  },
-  
+  },  
   {
     name: "Cinemo",
     type: "dash",
-    url: "https://live-faws.akamaized.net/out/v1/93b9db7b231d45f28f64f29b86dc6c65/index.mpd",
+    url: "https://live-faws.akamaized.net/out/v1/3a895f368f4a467c9bca0962559efc19/index.mpd",
     logo: "https://i.imgur.com/Pf8CNau.png",
     category: "Local Channels", live: true,
   },
-
-  {
-    name: "Cinemo Global",
-    type: "dash",
-    url: "https://d1bail49udbz1k.cloudfront.net/out/v1/3a895f368f4a467c9bca0962559efc19/index.mpd",
-    logo: "https://i.imgur.com/4xDiXMP.png",
-    category: "Local Channels", live: true,
-    clearKey: {
-      "aa8aebe35ccc4541b7ce6292efcb1bfb": "aab1df109d22fc5d7e3ec121ddf24e5f"
-    }
-  },
-
   {
     name: "DZMM TELERADYO",
     type: "dash",
