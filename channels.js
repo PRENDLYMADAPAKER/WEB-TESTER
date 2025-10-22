@@ -1406,4 +1406,719 @@ const combinedChannels = [
     "0f856fa0412b11edb8780242ac120002": "783374273ef97ad3bc992c1d63e091e7"
   }
   },
+  { name: "ABC USA (WFTS)", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/abc-logo-2008-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/FL_Tampa_ABC/index.m3u8" },
+
+  { name: "ABC USA (WABC)", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/abc-logo-2013-aluminum-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/ABC_EAST/index.m3u8" },
+
+  { name: "ACC NETWORK", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/acc-network-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/ACC_NETWORK/index.m3u8" },
+
+  { name: "AMC", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10021_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/AMC_NETWORK/index.m3u8" },
+
+  { name: "American Heroes Channel", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s18284_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/American_Heroes_Channel/index.m3u8" },
+
+  { name: "Animal Planet", type: "hls", category: "International Channels", live: true,
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/animal-planet-us.png",
+    url: "https://fl25.moveonjoy.com/Animal_Planet/index.m3u8" },
+
+  { name: "Antenna TV", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/antenna-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/Antenna_TV/index.m3u8" },
+
+  { name: "Aspire", type: "hls", category: "International Channels", live: true,
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-states/aspire-tv-us.png",
+    url: "https://fl25.moveonjoy.com/Aspire/index.m3u8" },
+
+  { name: "Bally Sports Arizona", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/bally-sports-arizona-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/BALLY_SPORTS_ARIZONA/index.m3u8" },
+
+  { name: "Bally Sports Midwest", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/bally-sports-midwest-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/BALLY_SPORTS_MIDWEST/index.m3u8" },
+
+  { name: "BBC AMERICA", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s18332_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/BBC_AMERICA/index.m3u8" },
+
+  { name: "BBC WORLD NEWS", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-kingdom/bbc-news-uk.png?raw=true",
+    url: "https://fl25.moveonjoy.com/BBC_WORLD_NEWS/index.m3u8" },
+
+  { name: "BEIN SPORTS", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/bein-sports-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/BEIN_SPORTS/index.m3u8" },
+
+  { name: "BET", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10051_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/BET_EAST/index.m3u8" },
+
+  { name: "BET GOSPEL", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/bet-gospel-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/BET_GOSPEL/index.m3u8" },
+
+  { name: "BET HER", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s14897_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/BET_HER/index.m3u8" },
+
+  { name: "BET Jams", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/bet-jams-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/BET_Jams/index.m3u8" },
+
+  { name: "BET SOUL", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/bet-soul-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/BET_SOUL/index.m3u8" },
+
+  { name: "Big Ten Network HD", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/big-ten-network-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/BIG_TEN_NETWORK/index.m3u8" },
+
+  { name: "BLOOMBERG", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/bloomberg-television-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/BLOOMBERG/index.m3u8" },
+
+  { name: "Boomerang", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s21883_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/BOOMERANG/index.m3u8" },
+
+  { name: "Bounce", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/bounce-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/BOUNCE_TV/index.m3u8" },
+    
+  { name: "BRAVO", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10057_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/BRAVO/index.m3u8" },
+
+  { name: "Buzzr", type: "hls", category: "International Channels", live: true,
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-states/buzzr-us.png",
+    url: "https://fl25.moveonjoy.com/Buzzr/index.m3u8" },
+
+  { name: "CARTOON NETWORK", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s12131_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/CARTOON_NETWORK/index.m3u8" },
+
+  { name: "CBS (WSBK)", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10098_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/CBS_News/index.m3u8" },
+
+  { name: "CBS (KKTV)", type: "hls", category: "International Channels", live: true,
+    logo: "http://drewlive24.duckdns.org:9000/Logos/CBS2.png",
+    url: "https://tinyurl.com/cbskktv2423" },
+
+  { name: "CBS SPORTS NETWORK", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s16365_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/CBS_SPORTS_NETWORK/index.m3u8" },
+
+  { name: "Cheddar Business", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cheddar-hz-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/CHEDDAR_BUSINESS/index.m3u8" },
+
+  { name: "CINEMAX EAST", type: "hls", category: "International Channels", live: true,
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/cinemax-us.png",
+    url: "https://fl25.moveonjoy.com/CINEMAX_EAST/index.m3u8" },
+
+  { name: "CINEMAX MOREMAX", type: "hls", category: "International Channels", live: true,
+    logo: "http://drewlive24.duckdns.org:9000/Logos/MoreMAX.png",
+    url: "http://23.237.104.106:8080/USA_MOREMAX/index.m3u8" },
+
+  { name: "CINEMAX WEST", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cinemax-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/CINEMAX_WEST/index.m3u8" },
+
+  { name: "Cleo TV", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cleo-tv-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/Cleo_TV/index.m3u8" },
+
+  { name: "CMT", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10138_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/CMT/index.m3u8" },
+
+  { name: "CNBC", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10139_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/CNBC/index.m3u8" },
+
+  { name: "CNN", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s58646_dark_360w_270h.png",
+    url: "https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_3_1464000.m3u8" },
+
+  { name: "CNN INTERNATIONAL", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cnn-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/CNN_INTERNATIONAL/index.m3u8" },
+
+  { name: "COMEDY CENTRAL", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10149_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/Comedy_Central/index.m3u8" },
+
+  { name: "Comedy TV", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/comedy-tv-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/Comedy_TV/index.m3u8" },
+
+  { name: "COMET", type: "hls", category: "International Channels", live: true,
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-states/comet-us.png",
+    url: "https://fast-channels.sinclairstoryline.com/COMET/index.m3u8" },
+
+  { name: "COOKING", type: "hls", category: "International Channels", live: true,
+    logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s30156_dark_360w_270h.png",
+    url: "https://fl25.moveonjoy.com/COOKING_CHANNEL/index.m3u8" },
+
+  { name: "COURT TV", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/court-tv-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/COURT_TV/index.m3u8" },
+
+  { name: "COZI TV", type: "hls", category: "International Channels", live: true,
+    logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cozi-tv-us.png?raw=true",
+    url: "https://fl25.moveonjoy.com/COZI_TV/index.m3u8" },
+
+  { name: "CRAVE 1", type: "hls", category: "International Channels", live: true,
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/canada/crave-1-ca.png",
+    url: "https://fl25.moveonjoy.com/CRAVE_1/index.m3u8" },
+
+  { name: "CRAVE 2", type: "hls", category: "International Channels", live: true,
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/canada/crave-2-ca.png",
+    url: "https://fl25.moveonjoy.com/CRAVE_2/index.m3u8" },
+
+  { name: "CRAVE 3", type: "hls", category: "International Channels", live: true,
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/canada/crave-3-ca.png",
+    url: "https://fl25.moveonjoy.com/CRAVE_3/index.m3u8" },
+
+  { name: "CRAVE 4", type: "hls", category: "International Channels", live: true,
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/canada/crave-4-ca.png",
+    url: "https://fl25.moveonjoy.com/CRAVE_4/index.m3u8" },
+    
+    { name: "Crime + Investigation", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/crime-and-investigation-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Crime_and_Investigation_Network/index.m3u8" },
+
+{ name: "C-SPAN", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10161_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/C-SPAN/index.m3u8" },
+
+{ name: "CW (WKCF)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cw-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/CW_ORLANDO/index.m3u8" },
+
+{ name: "Destination America", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/destination-america-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Destination_America/index.m3u8" },
+
+{ name: "Discovery Channel", type: "hls", category: "International Channels", live: true,
+  logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/discovery-channel-us.png",
+  url: "https://fl25.moveonjoy.com/Discovery_Channel/index.m3u8" },
+
+{ name: "DISCOVERY FAMILY CHANNEL", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s16618_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/DISCOVERY_FAMILY_CHANNEL/index.m3u8" },
+
+{ name: "DISCOVERY LIFE", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s16125_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/DISCOVERY_LIFE/index.m3u8" },
+
+{ name: "Discovery Science", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/discovery-science-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Discovery_Science/index.m3u8" },
+
+{ name: "DISNEY CHANNEL", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10171_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/DISNEY/index.m3u8" },
+
+{ name: "DISNEY JR", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s74796_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/DISNEY_JR/index.m3u8" },
+
+{ name: "DISNEY XD", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s18279_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/DISNEY_XD/index.m3u8" },
+
+{ name: "DIY", type: "hls", category: "International Channels", live: true,
+  logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/canada/diy-network-ca.png",
+  url: "https://fl25.moveonjoy.com/DIY/index.m3u8" },
+
+{ name: "E! East", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/e-entertainment-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/E_ENTERTAINMENT_TELEVISION/index.m3u8" },
+
+{ name: "ESPN 2", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s12444_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/ESPN_2/index.m3u8" },
+
+{ name: "ESPN NEWS", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s16485_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/ESPN_NEWS/index.m3u8" },
+
+{ name: "ESPN U", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s45654_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/ESPN_U/index.m3u8" },
+
+{ name: "FOOD NETWORK", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s12574_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/FOOD_NETWORK/index.m3u8" },
+
+{ name: "FOX USA (WFLX)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fox-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/FL_West_Palm_Beach_FOX/index.m3u8" },
+
+{ name: "FOX USA (WNYW)", type: "hls", category: "International Channels", live: true,
+  logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/us-local/fox-5-wnyw-us.png",
+  url: "https://fl25.moveonjoy.com/FOX_EAST/index.m3u8" },
+
+{ name: "FOX Business Network", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fox-business-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/FOX_Business_Network/index.m3u8" },
+
+{ name: "FOX News Channel", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s16374_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/FOX_NEWS_CHANNEL/index.m3u8" },
+
+{ name: "FOX SOUL", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fox-soul-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/FOX_SOUL/index.m3u8" },
+
+{ name: "Freeform", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10093_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/FREE_FORM/index.m3u8" },
+
+{ name: "FS1", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fox-sports-1-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/FOX_Sports_1/index.m3u8" },
+
+{ name: "FS2", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fox-sports-2-us.png?raw=true",
+  url: "http://23.237.104.106:8080/USA_FS2/index.m3u8" },
+
+{ name: "Fuse", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.amazonaws.com/stationLogos/s14929_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/FUSE/index.m3u8" },
+
+{ name: "FX", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s14321_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/FX/index.m3u8" },
+
+{ name: "FXM", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fxm-movie-channel-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/FX_MOVIE/index.m3u8" },
+
+{ name: "FXX", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s17927_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/FXX/index.m3u8" },
+
+{ name: "FYI FHD", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/fyi-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/FYI/index.m3u8" },
+
+{ name: "getTV", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/get-tv-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/GET_TV/index.m3u8" },
+
+{ name: "Global", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/canada/global-ca.png?raw=true",
+  url: "https://fl25.moveonjoy.com/CA_GLOBAL/index.m3u8" },
+
+{ name: "Golf Channel", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/nbc-golf-3d-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/GOLF/index.m3u8" },
+
+{ name: "GOLTV", type: "hls", category: "International Channels", live: true,
+  logo: "https://upload.wikimedia.org/wikipedia/commons/a/ad/GOLTV.png",
+  url: "http://23.237.104.106:8080/USA_GOLTV/index.m3u8" },
+
+{ name: "Great American Family", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/great-american-family-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Great_American_Country/index.m3u8" },
+
+{ name: "GRIT TV", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/grit-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/GRIT_TV/index.m3u8" },
+
+{ name: "Hallmark Channel", type: "hls", category: "International Channels", live: true,
+  logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/hallmark-channel-us.png",
+  url: "https://fl25.moveonjoy.com/HALLMARK_CHANNEL/index.m3u8" },
+
+{ name: "Hallmark Family", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/hallmark-family-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/HALLMARK_DRAMA/index.m3u8" },
+
+{ name: "Hallmark Mystery", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/hallmark-mystery-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/HALLMARK_MOVIES_MYSTERIES/index.m3u8" },
+
+{ name: "HBO", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10240_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/HBO/index.m3u8" },
+
+{ name: "HBO Comedy", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s18429_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/HBO_COMEDY/index.m3u8" },
+
+{ name: "HBO Family", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s16585_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/HBO_FAMILY/index.m3u8" },
+
+{ name: "HBO Zone", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s18431_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/HBO_ZONE/index.m3u8" },
+
+{ name: "HBO2", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s68140_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/HBO_2/index.m3u8" },
+
+{ name: "HGTV", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s14902_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/HGTV/index.m3u8" },
+  
+  { name: "History", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/history-channel-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/history_channel/index.m3u8" },
+
+{ name: "HLN", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10145_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/HLN/index.m3u8" },
+
+{ name: "HSN", type: "hls", category: "International Channels", live: true,
+  logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-states/hsn-us.png",
+  url: "https://fl25.moveonjoy.com/HSN/index.m3u8" },
+
+{ name: "ID (Investigation Discovery)", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s16615_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/INVESTIGATION_DISCOVERY/index.m3u8" },
+
+{ name: "INSP TV", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/insp-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/INSP/index.m3u8" },
+
+{ name: "ION", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/ion-television-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/ION_TV/index.m3u8" },
+
+{ name: "ION Plus", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/ion-plus-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/ION_Plus/index.m3u8" },
+
+{ name: "Lifetime", type: "hls", category: "International Channels", live: true,
+  logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/lifetime-us.png",
+  url: "https://fl25.moveonjoy.com/LIFETIME/index.m3u8" },
+
+{ name: "Lifetime Movies Network", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s18480_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/LIFETIME_MOVIE_NETWORK/index.m3u8" },
+
+{ name: "LOVE NATURE", type: "hls", category: "International Channels", live: true,
+  logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/canada/love-nature-4k-ca.png",
+  url: "https://fl25.moveonjoy.com/LOVE_NATURE/index.m3u8" },
+
+{ name: "Marquee Sports Network", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/marquee-sports-network-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/MARQUEE_SPORTS_NETWORK/index.m3u8" },
+
+{ name: "MAVTV", type: "hls", category: "International Channels", live: true,
+  logo: "https://motorsportsnewswire.com/wp-content/uploads/2019/08/mavtv-logo-678.png",
+  url: "https://fl25.moveonjoy.com/MAV_TV/index.m3u8" },
+
+{ name: "MeTV", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/me-tv-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/ME_TV/index.m3u8" },
+
+{ name: "MGM+", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mgm-plus-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/EPIX/index.m3u8" },
+
+{ name: "MGM+ Drive-In", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mgm-plus-drive-in-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/EPIX_DRIVE_IN/index.m3u8" },
+
+{ name: "MGM+ HITS", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mgm-plus-hits-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/EPIX_HITS/index.m3u8" },
+
+{ name: "Military History", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/military-history-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Military_History/index.m3u8" },
+
+{ name: "MLB Network", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s62081_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/MLB_NETWORK/index.m3u8" },
+
+  { name: "MotorTrend", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s31046_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/MOTOR_TREND/index.m3u8" },
+
+{ name: "MSG", type: "hls", category: "International Channels", live: true,
+  logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-states/msg-us.png",
+  url: "https://fl25.moveonjoy.com/MSG/index.m3u8" },
+
+{ name: "MTV", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s10986_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/MTV/index.m3u8" },
+
+{ name: "MTV Classic", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mtv-classic-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/MTV_CLASSIC/index.m3u8" },
+
+{ name: "MTV Live", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mtv-live-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/MTV_LIVE/index.m3u8" },
+
+{ name: "MTV2", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mtv-2-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/MTV_2/index.m3u8" },
+
+{ name: "MTVU", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/mtv-u-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/MTV_U/index.m3u8" },
+
+{ name: "MUCH", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/canada/much-ca.png?raw=true",
+  url: "https://fl25.moveonjoy.com/MUCH/index.m3u8" },
+
+{ name: "National Geographic", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s49438_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/National_Geographic/index.m3u8" },
+
+{ name: "National Geographic Wild", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s66804_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/Nat_Geo_Wild/index.m3u8" },
+
+{ name: "NBA TV", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/nba-tv-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/NBA_TV/index.m3u8" },
+
+{ name: "NBC (WNBC)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/nbc-logo-flat-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/NBC_EAST/index.m3u8" },
+
+{ name: "NBC (WFLA)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/nbc-logo-flat-hz-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/FL_Tampa_NBC/index.m3u8" },
+
+{ name: "NBC (WVGN)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/nbc-logo-alt-hz-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Virgin_Islands_NBC/index.m3u8" },
+
+{ name: "NBC Sports Boston", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/nbcsn-boston-hz-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/NBC_SPORTS_BOSTON/index.m3u8" },
+
+{ name: "NewsNation", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/news-nation-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/NEWS_NATION/index.m3u8" },
+
+{ name: "NFL Network", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/nfl-network-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/NFL_NETWORK/index.m3u8" },
+
+{ name: "NFL RedZone", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/nfl-red-zone-hz-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/NFL_RedZone/index.m3u8" },
+
+{ name: "NHL Network", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s58570_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/NHL_NETWORK/index.m3u8" },
+
+{ name: "Nickelodeon", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s11006_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/NICKELODEON/index.m3u8" },
+
+{ name: "NickJr", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s19211_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/NICK_JR/index.m3u8" },
+
+{ name: "NickMusic USA", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/nick-music-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/NICK_MUSIC/index.m3u8" },
+
+{ name: "NickToons", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/nick-toons-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/NICKTOONS/index.m3u8" },
+  
+  { name: "Nosey", type: "hls", category: "International Channels", live: true,
+  logo: "https://images.pluto.tv/channels/5aec96ec5126c2157123c657/featuredImage.jpg?auto=&q=70&fit=fill&fill=blur&ixlib=react-9.1.5",
+  url: "https://fl25.moveonjoy.com/Newsy/index.m3u8" },
+
+{ name: "NTV", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/canada/ntv-cjon-dt-ca.png?raw=true",
+  url: "https://2-fss-1.streamhoster.com/pl_122/201748-1431018-1/playlist.m3u8" },
+
+{ name: "Oprah Winfrey Network", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/oprah-winfrey-network-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/OWN/index.m3u8" },
+
+{ name: "Outdoor Channel", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/outdoor-channel-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/OUTDOOR_CHANNEL/index.m3u8" },
+
+{ name: "OUTSIDE TV", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/outside-tv-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/OUTSIDE_TV/index.m3u8" },
+
+{ name: "Ovation", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/ovation-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Ovation/index.m3u8" },
+
+{ name: "Oxygen", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/oxygen-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/OXYGEN/index.m3u8" },
+
+{ name: "Paramount Network", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/paramount-network-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/PARAMOUNT_NETWORK/index.m3u8" },
+
+{ name: "PBS (KET2)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/pbs-us.png?raw=true",
+  url: "https://2-fss-2.streamhoster.com/pl_140/amlst:200914-1315484/playlist.m3u8" },
+
+{ name: "PBS (KET-KY)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/pbs-us.png?raw=true",
+  url: "https://2-fss-2.streamhoster.com/pl_132/amlst:200914-1315486/playlist.m3u8" },
+
+{ name: "PBS (KMOS)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/pbs-us.png?raw=true",
+  url: "https://hls-kmosdt.lls.cdn.pbs.org/hls/live/index.m3u8" },
+
+{ name: "PBS (WKMJ-TV)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/pbs-us.png?raw=true",
+  url: "https://2-fss-1.streamhoster.com/pl_134/amlst:200914-1282960/playlist.m3u8" },
+
+{ name: "PBS Create (WMPT-DT2)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/create-us.png?raw=true",
+  url: "https://2-fss-1.streamhoster.com/pl_122/amlst:201814-2122456/playlist.m3u8" },
+
+{ name: "PBS East", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/pbs-us.png?raw=true",
+  url: "https://pbs.lls.cdn.pbs.org/est/index.m3u8" },
+
+{ name: "PBS Kids (KET)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/pbs-kids-dot-icon-us.png?raw=true",
+  url: "https://2-fss-2.streamhoster.com/pl_140/amlst:200914-1298290/playlist.m3u8" },
+
+{ name: "PBS MPT (WMPB)", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/pbs-us.png?raw=true",
+  url: "https://2-fss-2.streamhoster.com/pl_138/amlst:201814-1291584/playlist.m3u8" },
+
+{ name: "Pop TV", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/pop-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Pop_TV/index.m3u8" },
+
+{ name: "Pursuit Channel", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/pursuit-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Pursuit_Channel/index.m3u8" },
+
+{ name: "QVC", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/qvc-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/QVC/index.m3u8" },
+
+{ name: "ReelzChannel", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s52199_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/REELZ/index.m3u8" },
+
+{ name: "Revolt", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/revolt-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/REVOLT/index.m3u8" },
+
+{ name: "SEC Network", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/sec-network-us.png?raw=true",
+  url: "http://23.237.104.106:8080/USA_SEC_NETWORK/index.m3u8" },
+
+{ name: "Showtime", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/SHOWTIME/index.m3u8" },
+
+{ name: "Showtime 2", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-2-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/SHOWTIME_2/index.m3u8" },
+
+{ name: "Showtime Extreme", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-extreme-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/SHOWTIME_EXTREME/index.m3u8" },
+
+{ name: "Showtime Next", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-next-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/SHOWTIME_NEXT/index.m3u8" },
+
+{ name: "Showtime West", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/SHOWTIME_WEST/index.m3u8" },
+
+{ name: "Showtime Women", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/showtime-women-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/SHOWTIME_WOMEN/index.m3u8" },
+
+{ name: "Sky Sports Football", type: "hls", category: "International Channels", live: true,
+  logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/Sky-sports-football.jpg",
+  url: "https://fl25.moveonjoy.com/Sky_Sports_F1/index.m3u8" },
+
+{ name: "SMITHSONIAN CHANNEL", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/smithsonian-channel-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/SMITHSONIAN_CHANNEL/index.m3u8" },
+
+{ name: "Sony Movie Channel", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/sony-movie-channel-hz-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Sony_Movie_Channel/index.m3u8" },
+
+{ name: "Sportsman Channel", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/sportsman-channel-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/SPORTSMAN_CHANNEL/index.m3u8" },
+
+{ name: "SportsNet New York", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/sny-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/SNY/index.m3u8" },
+
+{ name: "Start TV", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/start-tv-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Start_Tv/index.m3u8" },
+
+{ name: "Starz", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/STARZ/index.m3u8" },
+
+{ name: "Starz Comedy", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-comedy-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/STARZ_COMEDY/index.m3u8" },
+
+{ name: "Starz Edge", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-edge-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/STARZ_EDGE/index.m3u8" },
+
+{ name: "Starz Encore Action", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-encore-action-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/STARZ_ENCORE_ACTION/index.m3u8" },
+
+{ name: "STARZ ENCORE CLASSIC", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-encore-classic-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/STARZ_ENCORE_CLASSIC/index.m3u8" },
+  
+  { name: "Starz Encore Westerns", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-encore-westerns-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/STARZ_ENCORE_WESTERNS/index.m3u8" },
+{ name: "STARZ WEST", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/starz-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/STARZ_WEST/index.m3u8" },
+{ name: "SundanceTV", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s16108_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/SUNDANCE/index.m3u8" },
+{ name: "SYFY", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/syfy-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/SYFY/index.m3u8" },
+{ name: "TBS", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s11867_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/TBS/index.m3u8" },
+{ name: "TCM", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s12852_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/TCM/index.m3u8" },
+{ name: "TeenNick", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/teen-nick-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Teen_Nick/index.m3u8" },
+{ name: "Tennis Channel", type: "hls", category: "International Channels", live: true,
+  logo: "http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s33395_dark_360w_270h.png",
+  url: "https://fl25.moveonjoy.com/TENNIS_CHANNEL/index.m3u8" },
+{ name: "The Cowboy Channel", type: "hls", category: "International Channels", live: true,
+  logo: "https://github.com/tv-logo/tv-logos/blob/main/countries/united-states/cowboy-channel-us.png?raw=true",
+  url: "https://fl25.moveonjoy.com/Cowboy_Channel/index.m3u8" },
 ];
