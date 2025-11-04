@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NZM IPTV Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin:0; height:100vh; display:flex; justify-content:center; align-items:center;
+      background:radial-gradient(circle at top,#0a1747 0%,#050a1c 100%);
+      font-family:Poppins,Arial,sans-serif; color:#fff;
+    }
+    .login-box {
+      background:rgba(255,255,255,0.08); padding:32px; border-radius:16px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.6); text-align:center; width:90%; max-width:360px;
+      backdrop-filter:blur(12px);
+    }
+    input {
+      width:100%; padding:12px; margin:8px 0; border-radius:10px;
+      border:none; background:rgba(255,255,255,0.1); color:#fff;
+    }
+    button {
+      width:100%; padding:12px; border:none; border-radius:10px;
+      background:linear-gradient(90deg,#1f80ff,#0062ff); color:#fff;
+      font-weight:600; cursor:pointer; box-shadow:0 0 20px rgba(31,128,255,0.4);
+    }
+    .msg{margin-top:10px;color:#ff8080;font-size:14px;}
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>NZM IPTV Login</h2>
+    <input id="email" type="email" placeholder="Email" required>
+    <input id="password" type="password" placeholder="Password" required>
+    <button id="loginBtn">Login</button>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module">
+    import { signInWithEmailAndPassword, onAuthStateChanged } 
+      from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+    import { ref, get, set, update, remove } 
+      from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
+
+    const msg = document.getElementById('msg');
+    const loginBtn = document.getElementById('loginBtn');
+
+    const deviceId = localStorage.getItem('deviceId') || (() => {
+      const id = crypto.randomUUID();
+      localStorage.setItem('deviceId', id);
+      return id;
+    })();
+
+    // DevTools protection
+    setInterval(() => {
+      if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
+        document.body.innerHTML = ""; window.close();
+      }
+    }, 1000);
+
+    loginBtn.onclick = async () => {
+      msg.textContent = "Signing in...";
+      const email = email.value.trim();
+      const password = password.value.trim();
+      try {
+        const cred = await signInWithEmailAndPassword(window.auth, email, password);
+        const uid = cred.user.uid;
+        const userRef = ref(window.db, `users/${uid}`);
+        const snap = await get(userRef);
+        const userData = snap.val();
+
+        if (!userData || !userData.approved) {
+          msg.textContent = "Access Denied: Not Approved.";
+          await window.auth.signOut();
+          return;
+        }
+
+        const devRef = ref(window.db, `devices/${uid}`);
+        const devSnap = await get(devRef);
+        const now = new Date().toISOString();
+        let devices = devSnap.exists() ? devSnap.val() : {};
+
+        // Keep only 2 most recent
+        const entries = Object.entries(devices);
+        if (entries.length >= 2) {
+          entries.sort((a,b)=>new Date(a[1].timestamp)-new Date(b[1].timestamp));
+          const oldestKey = entries[0][0];
+          await remove(ref(window.db, `devices/${uid}/${oldestKey}`));
+        }
+
+        // Register new device
+        await update(ref(window.db, `devices/${uid}/${deviceId}`), {
+          timestamp: now,
+          userAgent: navigator.userAgent
+        });
+
+        localStorage.setItem('uid', uid);
+        location.href = "index.html";
+      } catch (err) {
+        msg.textContent = err.message;
+      }
+    };
+  </script>
+</body>
+  </html>
